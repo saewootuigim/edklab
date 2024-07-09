@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications</title>
+</head>
+<body>
+    <h1>Publications</h1>
+    <ol>
+        {% for publication in publications %}
+            <li>
+                <p>
+                    {% with publication.authors as authors %}
+                        {% with target_author as target %}
+                            {% for author in authors %}
+                                {% if forloop.counter <= 3 %}
+                                    {% if author == target %}
+                                        <strong>{{ author }}</strong>{% if not forloop.last %}, {% endif %}
+                                    {% else %}
+                                        {{ author }}{% if not forloop.last %}, {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if target not in authors|slice:":3" %}
+                                , ... <strong>{{ target }}</strong>
+                            {% endif %}
+                        {% endwith %}
+                    {% endwith %}
+                    ({{ publication.year }}). 
+                    {{ publication.title }} <em>{{ publication.journal }}</em>, 
+                    {% if publication.issue %}<em>{{ publication.volume }}</em>{% endif %}
+                    {% if publication.issue %}({{ publication.issue }}),{% endif %}
+                    {% if publication.pages %}{{ publication.pages }}.{% endif %}
+                    <a href="https://doi.org/{{ publication.doi }}">link</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ol>
+</body>
+</html>
