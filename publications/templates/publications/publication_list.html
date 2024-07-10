@@ -7,24 +7,19 @@
 </head>
 <body>
     <h1>Publications</h1>
-    <ol>
+    <!-- <ol>
         {% for publication in publications %}
             <li>
                 <p>
                     {% with publication.authors as authors %}
                         {% with target_author as target %}
                             {% for author in authors %}
-                                {% if forloop.counter <= 3 %}
-                                    {% if author == target %}
-                                        <strong>{{ author }}</strong>{% if not forloop.last %}, {% endif %}
-                                    {% else %}
-                                        {{ author }}{% if not forloop.last %}, {% endif %}
-                                    {% endif %}
+                                {% if author == target %}
+                                    <strong>{{ author }}</strong>{% if not forloop.last %}, {% endif %}
+                                {% else %}
+                                    {{ author }}{% if not forloop.last %}, {% endif %}
                                 {% endif %}
                             {% endfor %}
-                            {% if target not in authors|slice:":3" %}
-                                , ... <strong>{{ target }}</strong>
-                            {% endif %}
                         {% endwith %}
                     {% endwith %}
                     ({{ publication.year }}). 
@@ -36,6 +31,24 @@
                 </p>
             </li>
         {% endfor %}
-    </ol>
+    </ol> -->
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Journal</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for publication in publications %}
+                <tr>
+                    <td><a href="https://doi.org/{{ publication.doi }}">{{ publication.title }}</a></td>
+                    <td>{{ publication.journal }}</td>
+                    <td>{{ publication.year }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

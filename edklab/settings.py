@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['saewootuigim.pythonanywhere.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'contact',
     "main",
     'people',
     'publications',

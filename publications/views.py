@@ -8,9 +8,9 @@ class PublicationListView(ListView):
     context_object_name = 'publications'
 
     def get_queryset(self):
-        first_name = self.kwargs.get('first_name', 'eun-deok')
-        last_name = self.kwargs.get('last_name', 'kim')
-        full_name = f"{last_name} {first_name}"  # Format: "LastName FirstName"
+        first_name = self.kwargs.get('first_name', 'Yansong')
+        last_name = self.kwargs.get('last_name', 'Miao')
+        full_name = f"{first_name} {last_name}"  # Format: "LastName FirstName"
 
         search_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
         fetch_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
@@ -81,8 +81,5 @@ class PublicationListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        first_name = self.kwargs.get('first_name', 'eun-deok')
-        last_name = self.kwargs.get('last_name', 'kim')
-        author_name = f"{last_name} {first_name[0]}"  # Format: "Last F"
-        context['target_author'] = author_name  # Pass the target author name to the context
+        context['target_author'] = self.kwargs.get('name_used_for_publication', 'Miao Y')  # Pass the target author name to the context
         return context

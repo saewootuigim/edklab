@@ -10,7 +10,7 @@
     <ul>
         {% for member in people.current_members %}
             <li>
-                <a href="{% url 'publication_list' first_name=member.first_name last_name=member.last_name %}">
+                <a href="{% url 'publication_list' first_name=member.first_name last_name=member.last_name name_used_for_publication=member.name_used_for_publication %}">
                     {{ member.first_name }} {{ member.last_name }} - {{ member.title }}
                     ({{ member.year_start }} - present)
                 </a>
@@ -21,7 +21,7 @@
     <ul>
         {% for member in people.former_members %}
             <li>
-                <a href="{% url 'publication_list' first_name=member.first_name last_name=member.last_name %}">
+                <a href="{% url 'publication_list' first_name=member.first_name last_name=member.last_name name_used_for_publication=member.name_used_for_publication %}">
                     {{ member.first_name }} {{ member.last_name }} - {{ member.title }}
                     ({{ member.year_start }} - {{ member.year_finish }})
                 </a>
