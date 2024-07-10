@@ -1,46 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .contact-info {
-            margin-bottom: 20px;
-        }
-        .contact-info p {
-            margin: 5px 0;
-        }
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ contact_info.google_maps_api_key }}&callback=initMap" async defer></script>
-    <script>
-        function initMap() {
-            var officeLocation = {lat: {{ contact_info.latitude }}, lng: {{ contact_info.longitude }}};
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: officeLocation
-            });
-            var marker = new google.maps.Marker({
-                position: officeLocation,
-                map: map
-            });
-        }
-    </script>
-</head>
-<body>
-    <h1>Contact Information</h1>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
     <div class="contact-info">
         <p><strong>Address:</strong> {{ contact_info.address }}</p>
         <p><strong>Phone Number:</strong> {{ contact_info.phone_number }}</p>
         <p><strong>Email:</strong> <a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a></p>
     </div>
-    <div id="map"></div>
-</body>
-</html>
+{% endblock %}

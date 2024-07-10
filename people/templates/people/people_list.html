@@ -1,32 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Members</title>
-</head>
-<body>
-    <h1>Current Lab Members</h1>
-    <ul>
-        {% for member in people.current_members %}
-            <li>
-                <a href="{% url 'publication_list' first_name=member.first_name last_name=member.last_name name_used_for_publication=member.name_used_for_publication %}">
-                    {{ member.first_name }} {{ member.last_name }} - {{ member.title }}
-                    ({{ member.year_start }} - present)
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-    <h1>Former Lab Members</h1>
-    <ul>
-        {% for member in people.former_members %}
-            <li>
-                <a href="{% url 'publication_list' first_name=member.first_name last_name=member.last_name name_used_for_publication=member.name_used_for_publication %}">
-                    {{ member.first_name }} {{ member.last_name }} - {{ member.title }}
-                    ({{ member.year_start }} - {{ member.year_finish }})
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}People{% endblock %}
+{% block content %}
+<h1 class="text-center py-4" id="current-members">Current Lab Members</h1>
+<div class="container">
+    {% for member in people.current_members %}
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6 card mb-3">
+            <div class="d-flex justify-content-center">
+            <img src="../../../static/people/{{ member.first_name }}{{ member.last_name }}.jpg" class="card-img-top"
+                style="width: 25rem;" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ member.first_name }} {{ member.last_name }}</h5>
+                <p class="card-text">{{ member.title }} ({{ member.year_start }} - present)<br />
+                </p>
+                <a href="#" class="btn btn-primary">See more</a>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    {% endfor %}
+</div>
+
+<h1 class="text-center py-4" id="former-members">Former Lab Members</h1>
+<div class="container">
+    {% for member in people.former_members %}
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6 card mb-3">
+            <div class="d-flex justify-content-center">
+            <img src="../../../static/people/{{ member.first_name }}{{ member.last_name }}.png" class="card-img-top"
+                style="width: 25rem;" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ member.first_name }} {{ member.last_name }}</h5>
+                <p class="card-text">{{ member.title }} ({{ member.year_start }} - {{ member.year_finish }})<br />
+                </p>
+                <a href="#" class="btn btn-primary">See more</a>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    {% endfor %}
+</div>
+<!-- <ul>
+    {% for member in people.former_members %}
+    <li>
+        <a
+            href="{% url 'publication_list' first_name=member.first_name last_name=member.last_name name_used_for_publication=member.name_used_for_publication %}">
+            {{ member.first_name }} {{ member.last_name }} - {{ member.title }}
+            ({{ member.year_start }} - {{ member.year_finish }})
+        </a>
+    </li>
+    {% endfor %}
+</ul> -->
+{% endblock %}
