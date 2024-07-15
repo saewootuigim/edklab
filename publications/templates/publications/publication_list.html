@@ -1,7 +1,27 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
+{% block extra_head %}
+<style>
+    ol.custom-counter {
+        counter-reset: custom-counter;
+    }
+    ol.custom-counter li {
+        counter-increment: custom-counter;
+        position: relative;
+        padding-left: .6em; /* Adjust padding to match the space needed for the counter */
+    }
+    ol.custom-counter li::before {
+        content: "[" counter(custom-counter) "]";
+        position: absolute;
+        left: -2.5em;
+        width: 2em; /* Adjust width to fit the space needed for the counter */
+        text-align: right;
+        margin-right: 0.5em;
+    }
+</style>
+{% endblock %}
 {% block content %}
-    <table class="table table-hover">
+    <!-- <table class="table table-hover">
         <thead class="table-dark">
             <tr>
                 <th>Title</th>
@@ -18,5 +38,12 @@
                 </tr>
             {% endfor %}
         </tbody>
-    </table>
+    </table> -->
+    <ol class="custom-counter">
+        {% for article in publications %}
+        <li class="list-group-item">
+            {{ article.authors }}, "{{ article.title }}," <em>{{ article.journal }}</em>, {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}, {% endif %} {{ article.year }}. <a href="{{ article.doi}}">{{ article.doi }}</a>
+        </li>
+        {% endfor %}
+    </ol>
 {% endblock %}
