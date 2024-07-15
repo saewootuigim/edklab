@@ -3,46 +3,44 @@
 {% block content %}
 <h1 class="text-center py-4" id="current-members">Current Lab Members</h1>
 <div class="container">
-    {% for member in people.current_members %}
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-6 card mb-3">
-            <div class="d-flex justify-content-center">
-            <img src="../../../static/people/{{ member.first_name }}{{ member.last_name }}.jpg" class="card-img-top"
-                style="width: 25rem;" alt="...">
+    <div class="row mb-4">
+        {% for member in people.current_members %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-1">
+                <div class="card">
+                    <!-- <img src="/static/people/{{ member.first_name }}{{ member.last_name }}.jpg" class="card-img-top" style="width: 25rem;" alt="..."> -->
+                    <img src="/static/people/{{ forloop.counter }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ member.first_name }} {{ member.last_name }}</h5>
+                        <p class="card-text">{{ member.title }} ({{ member.year_start }} - present)<br />
+                        </p>
+                        <a href="#" class="btn btn-primary">See more</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ member.first_name }} {{ member.last_name }}</h5>
-                <p class="card-text">{{ member.title }} ({{ member.year_start }} - present)<br />
-                </p>
-                <a href="#" class="btn btn-primary">See more</a>
-            </div>
-        </div>
-        <div class="col"></div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 <h1 class="text-center py-4" id="former-members">Former Lab Members</h1>
 <div class="container">
-    {% for member in people.former_members %}
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-6 card mb-3">
-            <div class="d-flex justify-content-center">
-            <img src="../../../static/people/{{ member.first_name }}{{ member.last_name }}.png" class="card-img-top"
-                style="width: 25rem;" alt="...">
+    <div class="row mb-4">
+        {% for member in people.former_members %}
+        {% if member.year_finish %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-1">
+                <div class="card">
+                    <!-- <img src="/static/people/{{ member.first_name }}{{ member.last_name }}.jpg" class="card-img-top" style="width: 25rem;" alt="..."> -->
+                    <img src="/static/people/5.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ member.first_name }} {{ member.last_name }} <span style="font-size:.8em;">({{ member.year_start }} - {{ member.year_finish }})</span></h5>
+                        <p class="card-text">{{ member.title }}<br />
+                        </p>
+                        <a href="#" class="btn btn-primary">See more</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ member.first_name }} {{ member.last_name }}</h5>
-                <p class="card-text">{{ member.title }} ({{ member.year_start }} - {{ member.year_finish }})<br />
-                </p>
-                <a href="#" class="btn btn-primary">See more</a>
-            </div>
-        </div>
-        <div class="col"></div>
+        {% endif %}
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 <!-- <ul>
     {% for member in people.former_members %}
