@@ -18,28 +18,25 @@
 <body>
     {% load static %}
     {% load nav_active %}
-    <nav class="navbar navbar-expand-lg">
-        <div class="collapse navbar-collapse justify-content-md-center" id="navbarNav">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link {% active_url request 'main_page' %}" aria-current="page" href="{% url 'main_page' %}">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <!-- <a class="nav-link dropdown-toggle {% active_url request 'people_list' %}" data-bs-toggle="dropdown" href="{% url 'people_list' %}" role="button" aria-expanded="false">People</a> -->
-                    <a class="nav-link dropdown-toggle {% active_url request 'people_list' %}" href="{% url 'people_list' %}" role="button" aria-expanded="false">People</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'people_list' %}#current-members">Current</a></li>
-                        <li><a class="dropdown-item" href="{% url 'people_list' %}#former-members">Former</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% active_url request 'publication_list' %}" href="{% url 'publication_list' %}">Publications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% active_url request 'contact' %}" href="{% url 'contact' %}">Contact</a>
-                </li>
-            </ul>
-        </div>
+    <nav class="navbar justify-content-center" id="navbarNav">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link {% active_url request 'main_page' %}" href="{% url 'main_page' %}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle {% active_url request 'people_list' %}" href="{% url 'people_list' %}" role="button" aria-expanded="false">People</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'people_list' %}#current-members">Current</a></li>
+                    <li><a class="dropdown-item" href="{% url 'people_list' %}#former-members">Former</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% active_url request 'publication_list' %}" href="{% url 'publication_list' %}">Publications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% active_url request 'contact' %}" href="{% url 'contact' %}">Contact</a>
+            </li>
+        </ul>
     </nav>
 
     <div class="container mt-4">
