@@ -8,16 +8,55 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     {% block extra_head %}{% endblock %}
     <style>
+        /* Override Bootstrap primary color */
+        :root {
+            --primary-color: #F76900; /* Custom primary color */
+        }
+        /* Anchor tag customization */
+        a {
+            color: var(--primary-color);
+            text-decoration: none; /* Remove underline */
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .btn-primary:active,
+        .btn-primary.active,
+        .btn-primary:active:focus {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .nav-pills .nav-link {
+            background-color: var(--custom-primary-color, #FFFFFF); /* Default to Bootstrap primary color */
+            color: #000000;
+        }
+        .nav-pills .nav-link:hover {
+            text-decoration: none; /* Remove underline on hover */
+            background-color: rgba(247, 105, 0, 0.2); /* Slightly lighter color on hover */
+        }
+        .nav-pills .nav-link.active {
+            background-color: var(--custom-primary-color, #F76900); /* Custom active background color */
+            color: #FFFFFF;
+        }
         /* Custom CSS for dropdown hover */
         .nav-item.dropdown:hover .dropdown-menu {
             display: block;
             margin-top: 0;
         }
+        
     </style>
 </head>
 <body>
     {% load static %}
     {% load nav_active %}
+    <nav class="navbar justify-content-center">
+        <a class="navbar-brand" href="{% url 'main_page' %}">
+            <img src="/static/syracuse-arts-sciences.svg" alt="Logo" style="height:50px;">
+        </a>
+    </nav>
     <nav class="navbar justify-content-center" id="navbarNav">
         <ul class="nav nav-pills">
             <li class="nav-item">
@@ -67,15 +106,18 @@
                 <div class="col-md-4">
                     <h5>Contact Us</h5>
                     <address>
-                        123 Main St.<br>
-                        Anytown, Anystate 12345, USA<br>
-                        <a href="mailto:info@example.com" class="text-white">info@example.com</a>
+                        Department of Biology<br/>
+                        114 Life Sciences Complex<br/>
+                        College of Arts and Sciences<br/>
+                        Syracuse University<br/>
+                        Syracuse, NY 13244, USA<br/>
+                        <a href="mailto:asdf@syr.edu">asdf@syr.edu</a>
                     </address>
                 </div>
             </div>
             <div class="row mb-1">
                 <div class="col-12">
-                    <p class="small">&copy;2024 Your Company Name. All rights reserved.</p>
+                    <p class="small">&copy;2024 Department of Biology, College of Arts and Sciences, Syracuse University.</p>
                 </div>
             </div>
         </div>

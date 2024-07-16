@@ -21,29 +21,40 @@
 </style>
 {% endblock %}
 {% block content %}
-    <!-- <table class="table table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Title</th>
-                <th>Journal</th>
-                <th>Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for publication in publications %}
-                <tr>
-                    <td><a href="https://doi.org/{{ publication.doi }}">{{ publication.title }}</a></td>
-                    <td>{{ publication.journal }}</td>
-                    <td>{{ publication.year }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table> -->
-    <ol class="custom-counter">
-        {% for article in publications %}
-        <li class="list-group-item">
-            {{ article.authors }}, "{{ article.title }}," <em>{{ article.journal }}</em>, {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}, {% endif %} {{ article.year }}. <a href="{{ article.doi}}">{{ article.doi }}</a>
-        </li>
-        {% endfor %}
-    </ol>
+<h2>Articles</h2>
+<ol class="custom-counter">
+    {% for article in publications %}
+    {% if article.type == "Journal" %}
+    <li class="list-group-item">
+        {{ article.authors }}<br/>
+        <a href="{{ article.doi}}">"{{ article.title }}"</a><br/>
+        <em>{{ article.journal }}</em><br/>
+        {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}, {% endif %} {{ article.year }}.<br/>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ol>
+<h2>Protocol</h2>
+<ol class="custom-counter">
+    {% for article in publications %}
+    {% if article.type == "Protocol" %}
+    <li class="list-group-item">
+        {{ article.authors }}<br/>
+        <a href="{{ article.doi}}">"{{ article.title }}"</a><br/>
+        <em>{{ article.journal }}</em><br/>
+        {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}, {% endif %} {{ article.year }}.<br/>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ol>
+<h2>Dissertation</h2>
+{% for article in publications %}
+{% if article.type == "Dissertation" %}
+<p>{{ article.authors }}<br/>
+    <a href="{{ article.doi}}">"{{ article.title }}"</a><br/>
+    <em>{{ article.journal }}</em><br/>
+    {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}, {% endif %} {{ article.year }}.<br/>
+</p>
+{% endif %}
+{% endfor %}
 {% endblock %}
