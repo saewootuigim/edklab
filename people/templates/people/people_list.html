@@ -1,45 +1,78 @@
 {% extends "base.html" %}
 {% block title %}People{% endblock %}
 {% block content %}
-<h1 class="text-center py-4" id="current-members">Current Lab Members</h1>
-<div class="container">
-    <div class="row mb-4">
-        {% for member in people.current_members %}
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-1">
-                <div class="card">
-                    <!-- <img src="/static/people/{{ member.first_name }}{{ member.last_name }}.jpg" class="card-img-top" style="width: 25rem;" alt="..."> -->
-                    <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ member.first_name }} {{ member.last_name }}</h5>
-                        <p class="card-text">{{ member.title }} ({{ member.year_start }} - present)<br />
-                        </p>
-                        <a href="#" class="btn btn-primary">See more</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
 
-<h1 class="text-center py-4" id="former-members">Former Lab Members</h1>
+{% for members in people.members %}
+{% if forloop.first %}
+    <h1 class="text-center py-4" id="former-members">Current Lab Members</h1>
+{% else %}
+    <h1 class="text-center py-4" id="former-members">Previous Lab Members</h1>
+{% endif %}
 <div class="container">
     <div class="row mb-4">
-        {% for member in people.former_members %}
-        {% if member.year_finish %}
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-1">
-                <div class="card">
-                    <!-- <img src="/static/people/{{ member.first_name }}{{ member.last_name }}.jpg" class="card-img-top" style="width: 25rem;" alt="..."> -->
-                    <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ member.first_name }} {{ member.last_name }} <span style="font-size:.8em;">({{ member.year_start }} - {{ member.year_finish }})</span></h5>
-                        <p class="card-text">{{ member.title }}<br />
-                        </p>
-                        <a href="#" class="btn btn-primary">See more</a>
-                    </div>
+        {% for member in members %}
+        <div class="col-lg-4 col-sm-6 col-12 mb-1">
+            <div class="card">
+                <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }} <span style="font-size:.8em;">({{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %})</span></h5>
+                    <p class="card-text">{{ member.title }}</p>
+                    <table style="border-collapse: separate; border-spacing:9px;">
+                        <tbody>
+                            {% if member.doctor_degree %}
+                            <tr>
+                                <td><strong>{{ member.doctor_degree }}</strong></td>
+                                <td>{{ member.doctor_school }}</td>
+                                <td>{{ member.doctor_earned_year }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if member.master_degree %}
+                            <tr>
+                                <td><strong>{{ member.master_degree }}</strong></td>
+                                <td>{{ member.master_school }}</td>
+                                <td>{{ member.master_earned_year }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if member.bachelor_degree %}
+                            <tr>
+                                <td><strong>{{ member.bachelor_degree }}</strong></td>
+                                <td>{{ member.bachelor_school }}</td>
+                                <td>{{ member.bachelor_earned_year }}</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <!-- <a href="#" class="btn btn-primary">See more</a> -->
+                    <table style="border-collapse: separate; border-spacing:9px;">
+                        <tbody>
+                            <tr>
+                            {% if member.google_scholar %}
+                                <td><a href="{{ member.google_scholar }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/googlescholar.svg" height="32" alt="google scholar logo">
+                                </a></td>
+                            {% endif %}
+                            {% if member.orcid %}
+                                <td><a href="{{ member.orcid }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/ORCID_iD.svg" height="32" alt="orcid logo">
+                                </a></td>
+                            {% endif %}
+                            {% if member.linkedin %}
+                                <td><a href="{{ member.linkedin }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/linkedin.svg" height="32" alt="linkedin logo">
+                                </a></td>
+                            {% endif %}
+                            {% if member.pubmed %}
+                                <td><a href="{{ member.pubmed }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/pubmed.svg" height="32" alt="pubmed logo">
+                                </a></td>
+                            {% endif %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        {% endif %}
+        </div>
         {% endfor %}
     </div>
 </div>
+{% endfor %}
 {% endblock %}
