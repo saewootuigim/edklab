@@ -11,6 +11,7 @@ class Publication(models.Model):
     title = models.CharField(max_length=999)
     authors = models.TextField(help_text="Comma separated list of authors")
     year = models.PositiveIntegerField()
+    month = models.PositiveIntegerField(blank=True, null=True)
     journal = models.CharField(max_length=255)
     volume = models.PositiveIntegerField(blank=True, null=True)
     issue = models.PositiveIntegerField(blank=True, null=True)
@@ -19,3 +20,6 @@ class Publication(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-year','-month']  # Sort by name in ascending order

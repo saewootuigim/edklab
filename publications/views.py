@@ -8,7 +8,7 @@ class PublicationListView(ListView):
     context_object_name = 'publications'
 
     def get_queryset(self):
-        publications = Publication.objects.all()
+        publications = Publication.objects.all().order_by('-year','-month')
         return publications
 
     def get_context_data(self, **kwargs):
