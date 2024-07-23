@@ -13,9 +13,9 @@ class PeopleListView(ListView):
         current_year = date.today().year
         people = {
             'members' : [
-                Person.objects.filter(year_finish__isnull=True), # current members
-                Person.objects.filter(year_finish__isnull=False) # previous members
+                Person.objects.filter(year_finish__isnull=True).order_by('priority','year_start','first_name'), # current members
+                Person.objects.filter(year_finish__isnull=False).order_by('year_finish','first_name') # previous members
             ]
         }
-        
+
         return people

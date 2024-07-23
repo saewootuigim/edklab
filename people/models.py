@@ -3,6 +3,8 @@ from django.core.validators import URLValidator
 
 
 class Person(models.Model):
+    # priority
+    priority = models.PositiveIntegerField(choices=((1,"supervisor"),(2,"postdoc"),(3,"grad student"),(4,"staff")), null=True, blank=True)
     # personal info
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, null=True, blank=True)
@@ -21,6 +23,9 @@ class Person(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    
+    # class Meta:
+    #     ordering = ['priority','-year_finish']  # Sort by name in ascending order
 
 
 class Education(models.Model):
