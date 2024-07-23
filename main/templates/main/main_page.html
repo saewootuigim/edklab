@@ -2,6 +2,17 @@
 {% block title %}Home{% endblock %}
 
 {% block extra_head %}
+<style>
+    /* Black outline for text in carousel for readability */
+    .carousel-caption h3,
+    .carousel-caption p {
+        text-shadow:
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px  1px 0 #000,
+        1px  1px 0 #000;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
