@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row justify-content-center mb-4">
+        {% for member in members %}
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+            <div class="card">
+                <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }} <span style="font-size:.8em;">({{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %})</span></h5>
+                    <p class="card-text">{{ member.title }}{% if member.position_after_finish %}<br/> now {{ member.position_after_finish }}{% endif %}</p>
+                    <table style="border-collapse: separate; border-spacing:9px;" class="w-100">
+                        <tbody>
+                            {% for education in member.educations.all %}
+                                <tr>
+                                    <td><strong>{{ education.degree }}</strong></td>
+                                    <td style="color:#F76900;">|</td>
+                                    <td>{{ education.school }}</td>
+                                    <td style="color:#F76900;">|</td>
+                                    <td>{{ education.year_earned }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <table style="border-collapse: separate; border-spacing:9px;">
+                        <tbody>
+                            <tr>
+                            {% if member.google_scholar %}
+                                <td><a href="{{ member.google_scholar }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/googlescholar.svg" height="32" alt="google scholar logo">
+                                </a></td>
+                            {% endif %}
+                            {% if member.orcid %}
+                                <td><a href="https://orcid.org/{{ member.orcid }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/ORCID_iD.svg" height="32" alt="orcid logo">
+                                </a></td>
+                            {% endif %}
+                            {% if member.linkedin %}
+                                <td><a href="{{ member.linkedin }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/linkedin.svg" height="32" alt="linkedin logo">
+                                </a></td>
+                            {% endif %}
+                            {% if member.pubmed %}
+                                <td><a href="{{ member.pubmed }}" target="_blank" class="image-link text-dark">
+                                    <img src="/static/icons/pubmed.svg" height="32" alt="pubmed logo">
+                                </a></td>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    {% if member.personal_website %}
+                    <div class="container mt-1 mb-0">
+                        <a href="{{ member.personal_website }}" target="_blank" class="btn btn-secondary" style="margin-left: -15px;">Personal Website</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -10,12 +10,28 @@ class PeopleListView(ListView):
     context_object_name = 'people'
 
     def get_queryset(self):
-        current_year = date.today().year
+        # current members
+        cr = Person.objects.filter(year_finish__isnull=True)
+        # supervisor
+        crs = cr.filter(priority=1).order_by('year_start', 'first_name')
+        # postdocs
+        crp = cr.filter(priority=2).order_by('year_start', 'first_name')
+        # grad students
+        crg = cr.filter(priority=3).order_by('year_start', 'first_name')
+        # staffs
+        crf = cr.filter(priority=4).order_by('year_start', 'first_name')
+
+        # alumni
+        al = Person.objects.filter(year_finish__isnull=False).order_by('-year_finish', 'priority')
+
         people = {
-            'members' : [
-                Person.objects.filter(year_finish__isnull=True).order_by('priority','year_start','first_name'), # current members
-                Person.objects.filter(year_finish__isnull=False).order_by('year_finish','first_name') # previous members
-            ]
+            'current' : {
+                'supervisors': crs,
+                'postdocs': crp,
+                'gradstudents': crg,
+                'staffs': crf,
+            },
+            'alum' : al
         }
 
         return people
