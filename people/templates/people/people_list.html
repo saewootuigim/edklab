@@ -2,6 +2,7 @@
 {% block title %}People{% endblock %}
 {% block content %}
 
+<div id="current-members">
 {% if people.current.supervisors %}
     <h2 class="text-center py-4">Supervisor</h1>
     {% include 'people/card.html' with members=people.current.supervisors %}
@@ -18,9 +19,11 @@
     <h2 class="text-center py-4">Staffs</h1>
     {% include 'people/card.html' with members=people.current.staffs %}
 {% endif %}
-
+</div>
+<div id="alumni">
 {% if people.alum %}
     <h2 class="text-center py-4">Lab Alumni</h1>
     {% include 'people/card.html' with members=people.alum %}
 {% endif %}
+</div>
 {% endblock %}
