@@ -23,9 +23,6 @@ class Person(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
-    # class Meta:
-    #     ordering = ['priority','-year_finish']  # Sort by name in ascending order
 
 
 class Education(models.Model):

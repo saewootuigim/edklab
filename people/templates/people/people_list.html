@@ -15,7 +15,7 @@
             <div class="card">
                 <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }} <span style="font-size:.8em;">({{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %})</span></h5>
+                    <h5 class="card-title">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }} <span style="font-size:.8em;">({{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %})</span></h5>
                     <p class="card-text">{{ member.title }}</p>
                     <table style="border-collapse: separate; border-spacing:9px;" class="w-100">
                         <tbody>
