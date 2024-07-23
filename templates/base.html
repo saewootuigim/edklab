@@ -12,6 +12,7 @@
         /* Override Bootstrap primary color */
         :root {
             --primary-color: #F76900; /* Custom primary color */
+            --secondary-color: #000E54;
         }
         /* Anchor tag customization */
         a {
@@ -21,6 +22,14 @@
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
+        }
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        .btn-secondary:hover {
+            text-decoration: none; /* Remove underline on hover */
+            background-color: #2B72D7; /* Slightly lighter color on hover */
         }
         .btn-primary:hover,
         .btn-primary:focus,

@@ -19,27 +19,15 @@
                     <p class="card-text">{{ member.title }}</p>
                     <table style="border-collapse: separate; border-spacing:9px;">
                         <tbody>
-                            {% if member.doctor_degree %}
-                            <tr>
-                                <td><strong>{{ member.doctor_degree }}</strong></td>
-                                <td>{{ member.doctor_school }}</td>
-                                <td>{{ member.doctor_earned_year }}</td>
-                            </tr>
-                            {% endif %}
-                            {% if member.master_degree %}
-                            <tr>
-                                <td><strong>{{ member.master_degree }}</strong></td>
-                                <td>{{ member.master_school }}</td>
-                                <td>{{ member.master_earned_year }}</td>
-                            </tr>
-                            {% endif %}
-                            {% if member.bachelor_degree %}
-                            <tr>
-                                <td><strong>{{ member.bachelor_degree }}</strong></td>
-                                <td>{{ member.bachelor_school }}</td>
-                                <td>{{ member.bachelor_earned_year }}</td>
-                            </tr>
-                            {% endif %}
+                            {% for education in member.educations.all %}
+                                <tr>
+                                    <td><strong>{{ education.degree }}</strong></td>
+                                    <td><span style="color:#F76900;">|</span></td>
+                                    <td>{{ education.school }}</td>
+                                    <td><span style="color:#F76900;">|</span></td>
+                                    <td>{{ education.year_earned }}</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                     <!-- <a href="#" class="btn btn-primary">See more</a> -->
@@ -68,6 +56,11 @@
                             {% endif %}
                         </tbody>
                     </table>
+                    {% if member.personal_website %}
+                    <div class="container mt-1 mb-0">
+                        <a href="{{ member.personal_website }}" target="_blank" class="btn btn-secondary" style="margin-left: -15px;">Personal Website</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

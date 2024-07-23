@@ -17,4 +17,5 @@ class PeopleListView(ListView):
                 Person.objects.filter(year_finish__isnull=False) # previous members
             ]
         }
+        
         return people
