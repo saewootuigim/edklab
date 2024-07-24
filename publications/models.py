@@ -4,7 +4,8 @@ from django.core.validators import URLValidator
 class Publication(models.Model):
     type = models.CharField(max_length=13, default="Journal",
         choices={
-            "Journal":"Journal",
+            "Article":"Article",
+            "Review":"Review",
             "Protocol":"Protocol",
             "Patent":"Patent",
             "Dissertation":"Dissertation"})

@@ -21,39 +21,79 @@
 </style>
 {% endblock %}
 {% block content %}
-<h2>Articles</h2>
-<ol class="custom-counter">
-    {% for article in publications %}
-    {% if article.type == "Journal" %}
-    <li class="list-group-item">
-        {{ article.authors }} ({{ article.year }})<br/>
-        <a href="{{ article.doi}}">{{ article.title }}</a><br/>
-        <em>{{ article.journal }}</em><br/>
-        {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
-    </li>
+{% for article in publications.article %}
+    {% if forloop.first %}
+        <h2>Articles</h2>
+        <ol class="custom-counter">
     {% endif %}
-    {% endfor %}
-</ol>
-<h2>Protocols</h2>
-<ol class="custom-counter">
-    {% for article in publications %}
-    {% if article.type == "Protocol" %}
-    <li class="list-group-item">
-        {{ article.authors }} ({{ article.year }})<br/>
-        <a href="{{ article.doi}}">{{ article.title }}</a><br/>
-        <em>{{ article.journal }}</em><br/>
-        {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }} {% endif %}
-    </li>
+            <li class="list-group-item">
+                {{ article.authors }} ({{ article.year }})<br/>
+                <a href="{{ article.doi}}">{{ article.title }}</a><br/>
+                <em>{{ article.journal }}</em><br/>
+                {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
+            </li>
+    {% if forloop.last %}
+        </ol>
     {% endif %}
-    {% endfor %}
-</ol>
-<h2>Dissertation</h2>
-{% for article in publications %}
-{% if article.type == "Dissertation" %}
-<p>{{ article.authors }} ({{ article.year }})<br/>
-    <a href="{{ article.doi}}">{{ article.title }}</a><br/>
-    <em>{{ article.journal }}</em>
-</p>
-{% endif %}
+{% endfor %}
+{% for article in publications.review %}
+    {% if forloop.first %}
+        <h2>Reviews</h2>
+        <ol class="custom-counter">
+    {% endif %}
+            <li class="list-group-item">
+                {{ article.authors }} ({{ article.year }})<br/>
+                <a href="{{ article.doi}}">{{ article.title }}</a><br/>
+                <em>{{ article.journal }}</em><br/>
+                {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
+            </li>
+    {% if forloop.last %}
+        </ol>
+    {% endif %}
+{% endfor %}
+{% for article in publications.protocol %}
+    {% if forloop.first %}
+        <h2>Protocols</h2>
+        <ol class="custom-counter">
+    {% endif %}
+            <li class="list-group-item">
+                {{ article.authors }} ({{ article.year }})<br/>
+                <a href="{{ article.doi}}">{{ article.title }}</a><br/>
+                <em>{{ article.journal }}</em><br/>
+                {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
+            </li>
+    {% if forloop.last %}
+        </ol>
+    {% endif %}
+{% endfor %}
+{% for article in publications.patent %}
+    {% if forloop.first %}
+        <h2>Patents</h2>
+        <ol class="custom-counter">
+    {% endif %}
+            <li class="list-group-item">
+                {{ article.authors }} ({{ article.year }})<br/>
+                <a href="{{ article.doi}}">{{ article.title }}</a><br/>
+                <em>{{ article.journal }}</em><br/>
+                {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
+            </li>
+    {% if forloop.last %}
+        </ol>
+    {% endif %}
+{% endfor %}
+{% for article in publications.dissertation %}
+    {% if forloop.first %}
+        <h2>Dissertations</h2>
+        <ol class="custom-counter">
+    {% endif %}
+            <li class="list-group-item">
+                {{ article.authors }} ({{ article.year }})<br/>
+                <a href="{{ article.doi}}">{{ article.title }}</a><br/>
+                <em>{{ article.journal }}</em><br/>
+                {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
+            </li>
+    {% if forloop.last %}
+        </ol>
+    {% endif %}
 {% endfor %}
 {% endblock %}

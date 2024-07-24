@@ -8,7 +8,18 @@ class PublicationListView(ListView):
     context_object_name = 'publications'
 
     def get_queryset(self):
-        publications = Publication.objects.all().order_by('-year','-month')
+        article = Publication.objects.filter(type="Article").order_by('-year','-month')
+        review = Publication.objects.filter(type="Review").order_by('-year','-month')
+        protocol = Publication.objects.filter(type="Protocol").order_by('-year','-month')
+        patent = Publication.objects.filter(type="Patent").order_by('-year','-month')
+        dissertation = Publication.objects.filter(type="Dissertation").order_by('-year','-month')
+        publications = {
+            "article" : article,
+            "review" : review,
+            "protocol" : protocol,
+            "patent" : patent,
+            "dissertation" : dissertation
+        }
         return publications
 
     def get_context_data(self, **kwargs):

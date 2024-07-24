@@ -5,8 +5,13 @@
             <div class="card">
                 <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }} <span style="font-size:.8em;">({{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %})</span></h5>
-                    <p class="card-text">{{ member.title }}{% if member.position_after_finish %}<br/> now {{ member.position_after_finish }}{% endif %}</p>
+                    <h5 class="card-title mb-1">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }}</h5>
+                    <p class="card-text mb-1">{{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %}</p>
+                    <p class="card-text mb-1">{{ member.title }}</p>
+                    {% if member.position_after_finish %}
+                    <p class="card-text mb-1">now {{ member.position_after_finish }}</p>
+                    {% endif %}
+                    {% if not member.year_finish %}
                     <table style="border-collapse: separate; border-spacing:9px;" class="w-100">
                         <tbody>
                             {% for education in member.educations.all %}
@@ -20,6 +25,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% endif %}
                     <table style="border-collapse: separate; border-spacing:9px;">
                         <tbody>
                             <tr>
