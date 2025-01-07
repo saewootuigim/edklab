@@ -129,12 +129,16 @@
                 <div class="col-md-4">
                     <h5>Contact Us</h5>
                     <address>
-                        Department of Biology<br/>
-                        114 Life Sciences Complex<br/>
-                        College of Arts and Sciences<br/>
-                        Syracuse University<br/>
-                        Syracuse, NY 13244, USA<br/>
-                        <a href="mailto:ekim112@syr.edu">ekim112@syr.edu</a>
+                        <p style="margin-top: 0;margin-bottom: 0;">456 Life Sciences Complex</p>
+                        <p style="margin-top: 0;margin-bottom: 0;">107 College Place</p>
+                        <p style="margin-top: 0;margin-bottom: 0;">Syracuse, NY 13244</p>
+                        <p style="margin-top: 0;margin-bottom: 0;">
+                            <!-- Content to be copied -->
+                            <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard()">ekim112@syr.edu</span>
+                            <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard()">
+                            <!-- Feedback message when copied-->
+                            <span id="feedback" style="color: var(--primary-color); display: none;">Email copied to clipboard!</span>
+                        </p>                        
                     </address>
                 </div>
             </div>
@@ -178,6 +182,35 @@
         document.getElementById('scrollToBottom').addEventListener('click', function() {
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         });
+
+        function copyToClipboard() {
+            // Get the text content from the paragraph
+            const textToCopy = document.getElementById("contentToCopy").innerText;
+
+            // Create a temporary textarea to hold the text
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = textToCopy;
+
+            // Append the textarea to the document body and select the content
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the textarea
+            document.execCommand("copy");
+
+            // Remove the temporary textarea
+            document.body.removeChild(tempTextArea);
+
+            // Show feedback message
+            const feedback = document.getElementById("feedback");
+            feedback.style.display = "block";
+
+            // Hide feedback message after 2 seconds
+            setTimeout(() => {
+                feedback.style.display = "none";
+            }, 2000);
+        }
     </script>
     {% block extra_script %}{% endblock %}
 </body>
