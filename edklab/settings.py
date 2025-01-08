@@ -26,11 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-# ALLOWED_HOSTS = ['saewootuigim.pythonanywhere.com', 'localhost']
-
-DEBUG = False
-ALLOWED_HOSTS = ['www.ekimlab.com']
+DEBUG = True
+ALLOWED_HOSTS = ['localhost','www.ekimlab.com']
 
 # Application definition
 
