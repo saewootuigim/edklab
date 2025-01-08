@@ -14,10 +14,10 @@
             <p style="margin-bottom: 0.5rem;"><strong>Email</strong>
             <p style="margin-left: 1rem; margin-bottom: 1rem;">
                 <!-- Content to be copied -->
-                <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard()">ekim112@syr.edu</span>
+                <span id="contentToCopy2" style="color: var(--primary-color);" onclick="copyToClipboard('contentToCopy2')">ekim112@syr.edu</span>
                 <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard()">
-                <!-- Feedback message when copied-->
-                <span id="feedback" style="color: var(--primary-color); display: none;">Email copied to clipboard!</span>
+                {% comment %} <!-- Feedback message when copied-->
+                <span id="feedback" style="color: var(--primary-color); display: none;">Email copied to clipboard!</span> {% endcomment %}
             </p>
         </div>
         <div class="col-lg-8 col">
@@ -33,7 +33,7 @@
                 <li>your CV</li>
                 <li>contact information for three references</li>
             </ol>
-            <p>to <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard()">ekim112@syr.edu</span> with "[POSITION] - your name" in the subject line and include CV and a letter of interest.</p>
+            <p>to <span id="contentToCopy1" style="color: var(--primary-color);" onclick="copyToClipboard('contentToCopy1')">ekim112@syr.edu</span> with "[POSITION] - your name" in the subject line and include CV and a letter of interest.</p>
             {% comment %} <p>Undergraduate students in their sophomore or higher year who are interested in research opportunities,
                 please send an unofficial transcript and letter of interest.</p> {% endcomment %}
         </div>

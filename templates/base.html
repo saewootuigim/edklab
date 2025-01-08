@@ -68,6 +68,18 @@
             flex-direction: column;
             gap: 10px;
         }
+        #feedback {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            left: 50%; /* Center horizontally */
+            top: 50%; /* Center vertically */
+            transform: translate(-50%, -50%); /* Center the element */
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+            color: white; /* Text color */
+            padding: 10px 20px; /* Some padding */
+            border-radius: 5px; /* Rounded corners */
+            z-index: 1000; /* Ensure it’s on top */
+        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
@@ -117,7 +129,8 @@
                     <h5>About Us</h5>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div> {% endcomment %}
-                <div class="col-md-4">
+                <div class="col-3"></div>
+                <div class="col-3">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="{% url 'main_page' %}" class="text-dark text-decoration-none">Home</a></li>
@@ -126,7 +139,7 @@
                         <li><a href="{% url 'contact' %}" class="text-dark text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-3">
                     <h5>Contact Us</h5>
                     <address>
                         <p style="margin-top: 0;margin-bottom: 0;">456 Life Sciences Complex</p>
@@ -134,13 +147,14 @@
                         <p style="margin-top: 0;margin-bottom: 0;">Syracuse, NY 13244</p>
                         <p style="margin-top: 0;margin-bottom: 0;">
                             <!-- Content to be copied -->
-                            <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard()">ekim112@syr.edu</span>
+                            <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard('contentToCopy')">ekim112@syr.edu</span>
                             <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard()">
                             <!-- Feedback message when copied-->
                             <span id="feedback" style="color: var(--primary-color); display: none;">Email copied to clipboard!</span>
                         </p>                        
                     </address>
                 </div>
+                <div class="col-3"></div>
             </div>
             <div class="row mb-2">
                 <p style="margin-bottom: 0.5rem;">This website is built with the following languages and tools:</p>
@@ -173,8 +187,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    <!-- JavaScript for the floating button -->
+    
     <script>
+        // JavaScript for the floating button
         document.getElementById('scrollToTop').addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -183,9 +198,9 @@
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         });
 
-        function copyToClipboard() {
+        function copyToClipboard(elementId) {
             // Get the text content from the paragraph
-            const textToCopy = document.getElementById("contentToCopy").innerText;
+            const textToCopy = document.getElementById(elementId).innerText;
 
             // Create a temporary textarea to hold the text
             const tempTextArea = document.createElement("textarea");
