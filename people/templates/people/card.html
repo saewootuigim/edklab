@@ -19,8 +19,8 @@
                                     <td><strong>{{ education.degree }}</strong></td>
                                     <td style="color:#F76900;">|</td>
                                     <td>{{ education.school }}</td>
-                                    <td style="color:#F76900;">|</td>
-                                    <td>{{ education.year_earned }}</td>
+                                    {% comment %} <td style="color:#F76900;">|</td>
+                                    <td>{{ education.year_earned }}</td> {% endcomment %}
                                 </tr>
                             {% endfor %}
                         </tbody>

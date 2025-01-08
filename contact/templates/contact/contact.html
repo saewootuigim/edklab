@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}KimLab | Contact{% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-lg-4 col">
@@ -22,13 +22,20 @@
         </div>
         <div class="col-lg-8 col">
             <h3>Available Positions</h3>
-            <p>Positions for postdoctoral researchers are available. Please contact the lab via
-                <!-- Content to be copied -->
-                <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard()">ekim112@syr.edu</span>
-                and include CV and a letter of interest.
-            </p>
-            <p>Undergraduate students in their sophomore or higher year who are interested in research opportunities,
-                please send an unofficial transcript and letter of interest.</p>
+            <ul>
+                <li>1 Postdoctoral Fellow</li>
+                <li>2 Graduate Students</li>
+                <li>1 Technician</li>
+            </ul>
+            <p>Please send</p>
+            <ol>
+                <li>a cover letter briefly summarizing your research interests and career goals</li>
+                <li>your CV</li>
+                <li>contact information for three references</li>
+            </ol>
+            <p>to <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard()">ekim112@syr.edu</span> with "[POSITION] - your name" in the subject line and include CV and a letter of interest.</p>
+            {% comment %} <p>Undergraduate students in their sophomore or higher year who are interested in research opportunities,
+                please send an unofficial transcript and letter of interest.</p> {% endcomment %}
         </div>
     </div>
     <div class="row pt-4">

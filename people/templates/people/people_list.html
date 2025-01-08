@@ -1,10 +1,9 @@
 {% extends "base.html" %}
-{% block title %}People{% endblock %}
+{% block title %}KimLab | people{% endblock %}
 {% block content %}
-
 <div id="current-members">
 {% if people.current.supervisors %}
-    <h2 class="text-center py-4">Supervisor</h1>
+    <h2 class="text-center py-4">Principal Investigator</h1>
     {% include 'people/card.html' with members=people.current.supervisors %}
 {% endif %}
 {% if people.current.postdocs %}
