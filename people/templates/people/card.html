@@ -3,7 +3,7 @@
         {% for member in members %}
         <div class="col-12 col-sm-6 col-md-4 mb-4">
             <div class="card">
-                <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="...">
+                <img src="/static/people/{{ member.first_name }} {{ member.last_name }}.jpg" class="card-img-top" style="min-height: 150px; max-height: 350px; object-fit:cover;" alt="..." oncontextmenu="return false;">
                 <div class="card-body">
                     <h5 class="card-title mb-1">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }}</h5>
                     <p class="card-text mb-1">{{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %}</p>
