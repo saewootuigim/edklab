@@ -21,7 +21,7 @@
 </style>
 {% endblock %}
 {% block content %}
-{% for article in publications.article %}
+{% comment %} {% for article in publications.article %}
     {% if forloop.first %}
         <h2>Articles</h2>
         <ol class="custom-counter">
@@ -95,5 +95,21 @@
     {% if forloop.last %}
         </ol>
     {% endif %}
+{% endfor %} {% endcomment %}
+{% for article in publications.all %}
+    {% if forloop.first %}
+        <h2>Publications</h2>
+        <ol class="custom-counter" id="search-scope">
+    {% endif %}
+            <li class="list-group-item pb-3" >
+                {{ article.authors }} ({{ article.year }})<br/>
+                <a href="{{ article.doi }}">{{ article.title }}</a><br/>
+                <em>{{ article.journal }}</em><br/>
+                {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
+            </li>
+    {% if forloop.last %}
+        </ol>
+    {% endif %}
 {% endfor %}
+
 {% endblock %}

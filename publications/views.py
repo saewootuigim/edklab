@@ -13,12 +13,14 @@ class PublicationListView(ListView):
         protocol = Publication.objects.filter(type="Protocol").order_by('-year','-month')
         patent = Publication.objects.filter(type="Patent").order_by('-year','-month')
         dissertation = Publication.objects.filter(type="Dissertation").order_by('-year','-month')
+        all = Publication.objects.all().order_by('-year','-month')
         publications = {
             "article" : article,
             "review" : review,
             "protocol" : protocol,
             "patent" : patent,
-            "dissertation" : dissertation
+            "dissertation" : dissertation,
+            "all" : all
         }
         return publications
 
