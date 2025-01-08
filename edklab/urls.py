@@ -23,4 +23,5 @@ urlpatterns = [
     path('contact/', include('contact.urls')),  # Contact information
     path('people/', include('people.urls')),  # People list
     path('publications/', include('publications.urls')),  # Publications list
+    path('opportunity/', include('opportunity.urls')), # Opportunity
 ]
