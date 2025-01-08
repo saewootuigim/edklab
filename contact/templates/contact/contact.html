@@ -15,7 +15,7 @@
             <p style="margin-left: 1rem; margin-bottom: 1rem;">
                 <!-- Content to be copied -->
                 <span id="contentToCopy2" style="color: var(--primary-color);" onclick="copyToClipboard('contentToCopy2')">ekim112@syr.edu</span>
-                <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard()">
+                <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard('contentToCopy2')">
                 {% comment %} <!-- Feedback message when copied-->
                 <span id="feedback" style="color: var(--primary-color); display: none;">Email copied to clipboard!</span> {% endcomment %}
             </p>

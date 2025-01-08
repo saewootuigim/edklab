@@ -125,12 +125,9 @@
     <footer class="footer mt-auto py-3">
         <div class="container">
             <div class="row mb-1">
-                {% comment %} <div class="col-md-4">
-                    <h5>About Us</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div> {% endcomment %}
-                <div class="col-3"></div>
-                <div class="col-3">
+                <!-- Left Column: Hidden on small screens -->
+                <div class="col-md-2 d-none d-md-block"></div>
+                <div class="col-6 col-md-4">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="{% url 'main_page' %}" class="text-dark text-decoration-none">Home</a></li>
@@ -139,7 +136,7 @@
                         <li><a href="{% url 'contact' %}" class="text-dark text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-3">
+                <div class="col-6 col-md-4">
                     <h5>Contact Us</h5>
                     <address>
                         <p style="margin-top: 0;margin-bottom: 0;">456 Life Sciences Complex</p>
@@ -148,13 +145,14 @@
                         <p style="margin-top: 0;margin-bottom: 0;">
                             <!-- Content to be copied -->
                             <span id="contentToCopy" style="color: var(--primary-color);" onclick="copyToClipboard('contentToCopy')">ekim112@syr.edu</span>
-                            <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard()">
+                            <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard('contentToCopy')">
                             <!-- Feedback message when copied-->
                             <span id="feedback" style="color: var(--primary-color); display: none;">Email copied to clipboard!</span>
                         </p>                        
                     </address>
                 </div>
-                <div class="col-3"></div>
+                <!-- Right Column: Hidden on small screens -->
+                <div class="col-md-2 d-none d-md-block"></div>
             </div>
             <div class="row mb-2">
                 <p style="margin-bottom: 0.5rem;">This website is built with the following languages and tools:</p>
