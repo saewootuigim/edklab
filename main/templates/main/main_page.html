@@ -44,40 +44,41 @@
 {% block content %}
 <!-- Carousel -->
 <div class="p-0 mb-5">
-    <div id="home-screen-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="home-screen-carousel" class="carousel slide" style="max-width: 840px; margin: 0 auto;" data-bs-ride="carousel">
 
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#home-screen-carousel" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#home-screen-carousel" data-bs-slide-to="1"></button>
             <button type="button" data-bs-target="#home-screen-carousel" data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#home-screen-carousel" data-bs-slide-to="3"></button>
+            <button type="button" data-bs-target="#home-screen-carousel" data-bs-slide-to="4"></button>
+            <button type="button" data-bs-target="#home-screen-carousel" data-bs-slide-to="5"></button>
         </div>
 
         <!-- The slideshow/carousel -->
         <div class="carousel-inner rounded-3">
             <div class="carousel-item active">
-                <img oncontextmenu="return false;" src="/static/201760910_MK162_in_scrmdlb_4dag_PI_z2_1.png" alt="1" class="d-block w-100 carousel-img-size">
+                <img oncontextmenu="return false;" src="/static/carousel1.png" alt="1" class="d-block carousel-img-size">
                 <!-- <div class="carousel-caption">
                     <h3>Crouse College</h3>
                     <p>Syracuse University</p>
                 </div> -->
             </div>
             <div class="carousel-item rounded-3">
-                <img oncontextmenu="return false;" src="/static/MAX_bpc123_C3.2_3dag_1x.png" alt="2" class="d-block w-100 carousel-img-size">
-                <!-- <div class="carousel-caption">
-                    <h3>Duxbury, MA, USA</h3>
-                    <p>Duxbury is located at south of Boston.</p>
-                </div> -->
+                <img oncontextmenu="return false;" src="/static/carousel2.png" alt="2" class="d-block carousel-img-size">
             </div>
-            <!-- <div class="carousel-item rounded-3">
-                <img src="/static/carousel3.jpg" alt="3" class="d-block w-100">
-                <div class="carousel-caption">
-                    <h3>Duxbury, MA, USA</h3>
-                    <p>Duxbury is located at south of Boston.</p>
-                </div>
-            </div> -->
+            <div class="carousel-item rounded-3">
+                <img oncontextmenu="return false;" src="/static/carousel3.png" alt="3" class="d-block carousel-img-size">
+            </div>
+            <div class="carousel-item rounded-3">
+                <img oncontextmenu="return false;" src="/static/carousel4.png" alt="4" class="d-block carousel-img-size">
+            </div>
+            <div class="carousel-item rounded-3">
+                <img oncontextmenu="return false;" src="/static/carousel5.png" alt="5" class="d-block carousel-img-size">
+            </div>
             <div class="carousel-item rounded-3" data-bs-interval="10000">
-                <video oncontextmenu="return false;" alt="3"  class="d-block w-100 carousel-video-size" autoplay loop muted>
+                <video oncontextmenu="return false;" alt="6"  class="d-block carousel-video-size" autoplay loop muted>
                     <source src="/static/Zuch-Herrmann_VideoS5.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -95,18 +96,16 @@
 </div>
 <div class="p-3 rounded-3">
     <div class="row">
-        <div class="col-2">
-            <!-- left margin -->
-        </div>
-        <div class="col-8">
+        <!-- Left Column: Hidden on small screens -->
+        <div class="col-md-2 d-none d-md-block"></div>
+
+        <!-- Center Column: Full width on small screens -->
+        <div class="col-12 col-md-8">
             <h1 class="display-6 fw-bold pb-4">Welcome to Kim Lab</h1>
         </div>
-        <!-- Right Column -->
-        <div class="col-2">
-            <!-- right margin -->
-        </div>
+        <!-- Right Column: Hidden on small screens -->
+        <div class="col-md-2 d-none d-md-block"></div>
     </div>
-    <!-- Left Column -->
     <div class="row">
         <!-- Left Column: Hidden on small screens -->
         <div class="col-md-2 d-none d-md-block"></div>

@@ -43,7 +43,7 @@
             background-color: var(--primary-color);
             border-color: var(--primary-color);
         }
-        .nav-pills .nav-link {
+        .navbar-nav .nav-link {
             background-color: var(--custom-primary-color, #FFFFFF); /* Default to Bootstrap primary color */
             color: #000000;
         }
@@ -51,9 +51,16 @@
             text-decoration: none;
             background-color: var(--primary-alpha-color);
         } */
-        .nav-pills .nav-link.active {
+        .navbar-nav .nav-link.active {
+            border-radius: 0.5rem;
             background-color: var(--primary-color); /* Custom active background color */
             color: #FFFFFF;
+        }
+        .navbar-toggler:focus,
+        .navbar-toggler:active {
+            outline: none; /* Ensure no outline on focus or active state */
+            box-shadow: 0 0 0 1px rgba(247, 107, 0, 0.52); /* Optional: add a subtle shadow */
+            border: 1px solid var(--primary-color); /* Optional: add a subtle border */
         }
         /* Custom CSS for dropdown hover */
         .nav-item.dropdown:hover .dropdown-menu {
@@ -74,7 +81,7 @@
             left: 50%; /* Center horizontally */
             top: 50%; /* Center vertically */
             transform: translate(-50%, -50%); /* Center the element */
-            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+            background-color:rgba(247, 107, 0, 0.8); /* Semi-transparent background */
             color: white; /* Text color */
             padding: 10px 20px; /* Some padding */
             border-radius: 5px; /* Rounded corners */
@@ -91,28 +98,35 @@
             <img src="/static/syracuse-arts-sciences.svg" alt="Logo" style="height:50px;">
         </a>
     </nav>
-    <nav class="navbar justify-content-center" id="navbarNav">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link {% active_url request 'main_page' %}" href="{% url 'main_page' %}">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% active_url request 'people_list' %}" href="{% url 'people_list' %}" role="button" aria-expanded="false">People</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url 'people_list' %}#current-members">Current</a></li>
-                    <li><a class="dropdown-item" href="{% url 'people_list' %}#alumni">Alumni</a></li>
+    <nav class="navbar navbar-expand-md" id="navbarNav">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% active_url request 'main_page' %}" href="{% url 'main_page' %}"><span class="mx-3">Home</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% active_url request 'people_list' %}" href="{% url 'people_list' %}" role="button" aria-expanded="false"><span class="mx-3">People</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'people_list' %}#current-members">Current</a></li>
+                            <li><a class="dropdown-item" href="{% url 'people_list' %}#alumni">Alumni</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% active_url request 'publication_list' %}" href="{% url 'publication_list' %}"><span class="mx-3">Publications</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% active_url request 'opportunity' %}" href="{% url 'opportunity' %}"><span class="mx-3">Opportunities</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% active_url request 'contact' %}" href="{% url 'contact' %}"><span class="mx-3">Contact</span></a>
+                    </li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% active_url request 'publication_list' %}" href="{% url 'publication_list' %}">Publications</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% active_url request 'opportunity' %}" href="{% url 'opportunity' %}">Opportunities</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% active_url request 'contact' %}" href="{% url 'contact' %}">Contact</a>
-            </li>
-        </ul>
+            </div>
+        </div>
     </nav>
 
     <div class="container mt-4">
@@ -151,7 +165,7 @@
                             <span id="contentToCopy0" style="color: var(--primary-color);" onclick="copyToClipboard('contentToCopy0')">ekim112@syr.edu</span>
                             <img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard('contentToCopy0')">
                             <!-- Feedback message when copied-->
-                            <span id="feedback" style="color: var(--primary-color); display: none;">Email copied to clipboard!</span>
+                            <span id="feedback" style="display: none;">Email copied to clipboard!</span>
                         </p>                        
                     </address>
                 </div>
@@ -177,7 +191,7 @@
                 <!-- Left Column: Hidden on small screens -->
                 <div class="col-md-2 d-none d-md-block"></div>
                 <div class="col-12 col-md-8">
-                    <p class="small">&copy;2024 Eun-Deok Kim's Lab.</p>
+                    <p class="small">&copy;2024-2025 Eun-Deok Kim's Lab.</p>
                 </div>
                 <!-- Right Column: Hidden on small screens -->
                 <div class="col-md-2 d-none d-md-block"></div>
