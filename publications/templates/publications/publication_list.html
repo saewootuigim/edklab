@@ -96,20 +96,44 @@
         </ol>
     {% endif %}
 {% endfor %} {% endcomment %}
+<div class="row justify-content-center">
+<div class="col-lg-8 col-md-10 col-sm-12">
 {% for article in publications.all %}
     {% if forloop.first %}
-        <h2>Publications</h2>
+        <h3>Publications</h3>
         <ol class="custom-counter" id="search-scope">
     {% endif %}
+    {% if article.type != "Dissertation" %}
             <li class="list-group-item pb-3" >
-                {{ article.authors }} ({{ article.year }})<br/>
+                <span>{{ article.authors }}</span> ({{ article.year }})<br/>
                 <a href="{{ article.doi }}">{{ article.title }}</a><br/>
                 <em>{{ article.journal }}</em><br/>
                 {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
             </li>
+    {% endif %}
     {% if forloop.last %}
         </ol>
     {% endif %}
 {% endfor %}
+</div>
+</div>
+<script>
+    // Select all <li> elements with the class 'name-item'
+    const liElements = document.querySelectorAll('.list-group-item span');
 
+    // Create a regex pattern to match the name, using word boundaries to match the exact name
+    const regex = /Eun[\s\S]*?Deok[\s\S]*?Kim/;
+
+    // Iterate over each <li> element
+    liElements.forEach(liElement => {
+        // Get the content of the <li> element
+        const content = liElement.textContent;
+
+        // Replace the substring with its bold version
+        const boldedContent = content.replace(regex, `<strong>Eun-Deok Kim</strong>`);
+
+        // Update the <li> element's HTML
+        liElement.innerHTML = boldedContent;
+    });
+</script>
 {% endblock %}
