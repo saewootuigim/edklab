@@ -106,7 +106,7 @@
     {% if article.type != "Dissertation" %}
             <li class="list-group-item pb-3" >
                 <span>{{ article.authors }}</span> ({{ article.year }})<br/>
-                <a href="{{ article.doi }}">{{ article.title }}</a><br/>
+                <a href="{{ article.doi }}" target="_blank">{{ article.title }}</a><br/>
                 <em>{{ article.journal }}</em><br/>
                 {% if article.volume %} vol. {{ article.volume }}, {% endif %} {% if article.issue %} issue {{ article.issue }}, {% endif %} {% if article.pages %} pp. {{ article.pages }}{% endif %}
             </li>
