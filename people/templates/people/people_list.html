@@ -18,6 +18,10 @@
     <h2 class="text-center py-4">Staffs</h1>
     {% include 'people/card.html' with members=people.current.staffs %}
 {% endif %}
+{% if people.current.undergrad %}
+    <h2 class="text-center py-4">Undergraduate Student</h1>
+    {% include 'people/card.html' with members=people.current.undergrad %}
+{% endif %}
 </div>
 <div id="alumni">
 {% if people.alum %}

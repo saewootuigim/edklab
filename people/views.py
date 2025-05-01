@@ -20,6 +20,8 @@ class PeopleListView(ListView):
         crg = cr.filter(priority=3).order_by('year_start', 'first_name')
         # staffs
         crf = cr.filter(priority=4).order_by('year_start', 'first_name')
+        # undergrad
+        cru = cr.filter(priority=5).order_by('year_start', 'first_name')
 
         # alumni
         al = Person.objects.filter(year_finish__isnull=False).order_by('-year_finish', 'priority')
@@ -30,8 +32,10 @@ class PeopleListView(ListView):
                 'postdocs': crp,
                 'gradstudents': crg,
                 'staffs': crf,
+                'undergrad': cru,
             },
             'alum' : al
         }
+        print(people)
 
         return people
