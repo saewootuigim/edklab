@@ -27,31 +27,28 @@
                         </tbody>
                     </table>
                     {% endif %}
-                    <table style="border-collapse: separate; border-spacing:9px;">
-                        <tbody>
-                            <tr>
-                            {% if member.google_scholar %}
-                                <td><a href="{{ member.google_scholar }}" target="_blank" class="image-link text-dark">
-                                    <img src="/static/icons/googlescholar.svg" height="32" alt="google scholar logo">
-                                </a></td>
-                            {% endif %}
-                            {% if member.orcid %}
-                                <td><a href="https://orcid.org/{{ member.orcid }}" target="_blank" class="image-link text-dark">
-                                    <img src="/static/icons/ORCID_iD.svg" height="32" alt="orcid logo">
-                                </a></td>
-                            {% endif %}
-                            {% if member.linkedin %}
-                                <td><a href="{{ member.linkedin }}" target="_blank" class="image-link text-dark">
-                                    <img src="/static/icons/linkedin.svg" height="32" alt="linkedin logo">
-                                </a></td>
-                            {% endif %}
-                            {% if member.pubmed %}
-                                <td><a href="{{ member.pubmed }}" target="_blank" class="image-link text-dark">
-                                    <img src="/static/icons/pubmed.svg" height="32" alt="pubmed logo">
-                                </a></td>
-                            {% endif %}
-                        </tbody>
-                    </table>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        {% if member.google_scholar %}
+                        <a href="{{ member.google_scholar }}" target="_blank">
+                            <img src="/static/icons/googlescholar.svg" height="32" alt="google scholar logo">
+                        </a>
+                        {% endif %}
+                        {% if member.orcid %}
+                        <a href="https://orcid.org/{{ member.orcid }}" target="_blank">
+                            <img src="/static/icons/ORCID_iD.svg" height="32" alt="orcid logo">
+                        </a>
+                        {% endif %}
+                        {% if member.linkedin %}
+                        <a href="{{ member.linkedin }}" target="_blank">
+                            <img src="/static/icons/linkedin.svg" height="32" alt="linkedin logo">
+                        </a>
+                        {% endif %}
+                        {% if member.pubmed %}
+                        <a href="{{ member.pubmed }}" target="_blank">
+                            <img src="/static/icons/pubmed.svg" height="32" alt="pubmed logo">
+                        </a>
+                        {% endif %}
+                    </div>
                     {% if member.personal_website %}
                     <div class="container mt-1 mb-0">
                         <a href="{{ member.personal_website }}" target="_blank" class="btn btn-secondary" style="margin-left: -15px;">Personal Website</a>
