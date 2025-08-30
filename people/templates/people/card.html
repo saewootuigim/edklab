@@ -8,6 +8,7 @@
                     <h5 class="card-title mb-1">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }}</h5>
                     <p class="card-text mb-1">{{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %}</p>
                     <p class="card-text mb-1">{{ member.title }}</p>
+                    <p><span id="{{ member.first_name }}{{ member.last_name }}" style="color: var(--primary-color);" onclick="copyToClipboard('{{ member.first_name }}{{ member.last_name }}')">{{ member.email }}</span><img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard('{{ member.first_name }}{{ member.last_name }}')"></p>
                     {% if member.position_after_finish %}
                     <p class="card-text mb-1">now {{ member.position_after_finish }}</p>
                     {% endif %}
