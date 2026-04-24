@@ -5,7 +5,7 @@ from django.db.models import Case, When, IntegerField
 
 class Person(models.Model):
     # priority
-    priority = models.PositiveIntegerField(choices=((1,"supervisor"),(2,"postdoc"),(3,"grad student"),(4,"staff"),(5,"undergrad")), null=True, blank=True)
+    priority = models.PositiveIntegerField(choices=((1,"supervisor"),(2,"postdoc"),(3,"visiting scholar"),(4,"grad student"),(5,"staff"),(6,"undergrad")), null=True, blank=True)
     # personal info
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, null=True, blank=True)

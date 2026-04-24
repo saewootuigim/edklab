@@ -10,6 +10,10 @@
     <h2 class="text-center py-4">Postdoctoral Researcher</h1>
     {% include 'people/card.html' with members=people.current.postdocs %}
 {% endif %}
+{% if people.current.visitingscholars %}
+    <h2 class="text-center py-4">Visiting Scholars</h1>
+    {% include 'people/card.html' with members=people.current.visitingscholars %}
+{% endif %}
 {% if people.current.gradstudents %}
     <h2 class="text-center py-4">Graduate Students</h1>
     {% include 'people/card.html' with members=people.current.gradstudents %}

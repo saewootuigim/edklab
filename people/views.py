@@ -16,12 +16,14 @@ class PeopleListView(ListView):
         crs = cr.filter(priority=1).order_by('year_start', 'first_name')
         # postdocs
         crp = cr.filter(priority=2).order_by('year_start', 'first_name')
+        # visiting scholar
+        crvs = cr.filter(priority=3).order_by('year_start', 'first_name')
         # grad students
-        crg = cr.filter(priority=3).order_by('year_start', 'first_name')
+        crg = cr.filter(priority=4).order_by('year_start', 'first_name')
         # staffs
-        crf = cr.filter(priority=4).order_by('year_start', 'first_name')
+        crf = cr.filter(priority=5).order_by('year_start', 'first_name')
         # undergrad
-        cru = cr.filter(priority=5).order_by('year_start', 'first_name')
+        cru = cr.filter(priority=6).order_by('year_start', 'first_name')
 
         # alumni
         al = Person.objects.filter(year_finish__isnull=False).order_by('-year_finish', 'priority')
@@ -30,6 +32,7 @@ class PeopleListView(ListView):
             'current' : {
                 'supervisors': crs,
                 'postdocs': crp,
+                'visitingscholars': crvs,
                 'gradstudents': crg,
                 'staffs': crf,
                 'undergrad': cru,
