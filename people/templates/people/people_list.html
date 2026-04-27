@@ -3,33 +3,47 @@
 {% block content %}
 <div id="current-members">
 {% if people.current.supervisors %}
-    <h2 class="text-center py-4">Principal Investigator</h1>
+    <h2 class="text-center py-4">
+        Principal Investigator{{ people.current.supervisors|pluralize }}
+    </h2>
     {% include 'people/card.html' with members=people.current.supervisors %}
 {% endif %}
 {% if people.current.postdocs %}
-    <h2 class="text-center py-4">Postdoctoral Researcher</h1>
+    <h2 class="text-center py-4">
+        Postdoctoral Researcher{{ people.current.postdocs|pluralize }}
+    </h2>
     {% include 'people/card.html' with members=people.current.postdocs %}
 {% endif %}
 {% if people.current.visitingscholars %}
-    <h2 class="text-center py-4">Visiting Scholars</h1>
+    <h2 class="text-center py-4">
+        Visiting Scholar{{ people.current.visitingscholars|pluralize }}
+    </h2>
     {% include 'people/card.html' with members=people.current.visitingscholars %}
 {% endif %}
 {% if people.current.gradstudents %}
-    <h2 class="text-center py-4">Graduate Students</h1>
+    <h2 class="text-center py-4">
+        Graduate Student{{ people.current.gradstudents|pluralize }}
+    </h2>
     {% include 'people/card.html' with members=people.current.gradstudents %}
 {% endif %}
 {% if people.current.staffs %}
-    <h2 class="text-center py-4">Staffs</h1>
+    <h2 class="text-center py-4">
+        Staff{{ people.current.staffs|pluralize }}
+    </h2>
     {% include 'people/card.html' with members=people.current.staffs %}
 {% endif %}
 {% if people.current.undergrad %}
-    <h2 class="text-center py-4">Undergraduate Student</h1>
+    <h2 class="text-center py-4">
+        Undergraduate Student{{ people.current.undergrad|pluralize }}
+    </h2>
     {% include 'people/card.html' with members=people.current.undergrad %}
 {% endif %}
 </div>
 <div id="alumni">
 {% if people.alum %}
-    <h2 class="text-center py-4">Lab Alumni</h1>
+    <h2 class="text-center py-4">
+        Lab Alumni{{ people.current.|pluralize }}
+    </h2>
     {% include 'people/card.html' with members=people.alum %}
 {% endif %}
 </div>
