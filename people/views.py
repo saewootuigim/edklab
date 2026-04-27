@@ -1,8 +1,15 @@
+from collections import Counter
 from django.views.generic import ListView
-from django.urls import reverse
-from django.shortcuts import redirect
 from .models import Person
-from datetime import date
+
+DISPLAY_NAMES = {
+    1: ('Principal Investigator', 'Principal Investigators'),
+    2: ('Postdoctoral Researcher', 'Postdoctoral Researchers'),
+    3: ('Visiting Scholar', 'Visiting Scholars'),
+    4: ('Graduate Student', 'Graduate Students'),
+    5: ('Staff', 'Staff'),
+    6: ('Undergraduate Student', 'Undergraduate Students'),
+}
 
 class PeopleListView(ListView):
     model = Person
@@ -10,35 +17,27 @@ class PeopleListView(ListView):
     context_object_name = 'people'
 
     def get_queryset(self):
-        # current members
-        cr = Person.objects.filter(year_finish__isnull=True)
-        # supervisor
-        crs = cr.filter(priority=1).order_by('year_start', 'first_name')
-        # postdocs
-        crp = cr.filter(priority=2).order_by('year_start', 'first_name')
-        # visiting scholar
-        crvs = cr.filter(priority=3).order_by('year_start', 'first_name')
-        # grad students
-        crg = cr.filter(priority=4).order_by('year_start', 'first_name')
-        # staffs
-        crf = cr.filter(priority=5).order_by('year_start', 'first_name')
-        # undergrad
-        cru = cr.filter(priority=6).order_by('year_start', 'first_name')
+        current_qs = Person.objects.filter(
+            year_finish__isnull=True
+        ).prefetch_related('educations').order_by('priority', 'year_start', 'first_name')
 
-        # alumni
-        al = Person.objects.filter(year_finish__isnull=False).order_by('-year_finish', 'priority')
+        priority_counts = Counter(p.priority for p in current_qs)
 
-        people = {
-            'current' : {
-                'supervisors': crs,
-                'postdocs': crp,
-                'visitingscholars': crvs,
-                'gradstudents': crg,
-                'staffs': crf,
-                'undergrad': cru,
-            },
-            'alum' : al
+        current_members = []
+        seen_priorities = set()
+        for person in current_qs:
+            person.is_first_of_category = person.priority not in seen_priorities
+            if person.is_first_of_category:
+                singular, plural = DISPLAY_NAMES.get(person.priority, ('', ''))
+                person.category_label = plural if priority_counts[person.priority] > 1 else singular
+                seen_priorities.add(person.priority)
+            current_members.append(person)
+
+        alumni = Person.objects.filter(
+            year_finish__isnull=False
+        ).prefetch_related('educations').order_by('-year_finish', 'priority')
+
+        return {
+            'current_members': current_members,
+            'alum': alumni,
         }
-        print(people)
-
-        return people

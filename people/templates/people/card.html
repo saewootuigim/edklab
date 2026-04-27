@@ -1,77 +1,66 @@
 {% load static %}
+<div class="card h-100">
+    <picture>
+        <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.webp" type="image/webp">
+        <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.png"  type="image/png">
+        <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.gif"  type="image/gif">
+        <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.jpeg" type="image/jpeg">
 
-<div class="container">
-    <div class="row justify-content-center mb-4">
-        {% for member in members %}
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card">
-                <picture>
-                    <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.webp" type="image/webp">
-                    <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.png"  type="image/png">
-                    <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.gif"  type="image/gif">
-                    <source srcset="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.jpeg" type="image/jpeg">
-
-                    <img
-                        src="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.jpg"
-                        class="card-img-top"
-                        style="aspect-ratio: 1 / 1; width: 100%; object-fit: cover;"
-                        alt="{{ member.first_name }} {{ member.last_name }}"
-                        oncontextmenu="return false;"
-                    >
-                </picture>
-                <div class="card-body">
-                    <h5 class="card-title mb-1">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }}</h5>
-                    <p class="card-text mb-1">{{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %}</p>
-                    <p class="card-text mb-1">{{ member.title }}</p>
-                    <p><span id="{{ member.first_name }}{{ member.last_name }}" style="color: var(--primary-color);" onclick="copyToClipboard('{{ member.first_name }}{{ member.last_name }}')">{{ member.email }}</span><img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard('{{ member.first_name }}{{ member.last_name }}')"></p>
-                    {% if member.position_after_finish %}
-                    <p class="card-text mb-1">now {{ member.position_after_finish }}</p>
-                    {% endif %}
-                    {% if not member.year_finish %}
-                    <table style="border-collapse: separate; border-spacing:9px;" class="w-100">
-                        <tbody>
-                            {% for education in member.educations.all %}
-                                <tr>
-                                    <td><strong>{{ education.degree }}</strong></td>
-                                    <td style="color:#F76900;">|</td>
-                                    <td>{{ education.school }}</td>
-                                    {% comment %} <td style="color:#F76900;">|</td>
-                                    <td>{{ education.year_earned }}</td> {% endcomment %}
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {% endif %}
-                    <div class="d-flex flex-wrap gap-2 mt-2">
-                        {% if member.google_scholar %}
-                        <a href="{{ member.google_scholar }}" target="_blank">
-                            <img src="/static/icons/googlescholar.svg" height="32" alt="google scholar logo">
-                        </a>
-                        {% endif %}
-                        {% if member.orcid %}
-                        <a href="https://orcid.org/{{ member.orcid }}" target="_blank">
-                            <img src="/static/icons/ORCID_iD.svg" height="32" alt="orcid logo">
-                        </a>
-                        {% endif %}
-                        {% if member.linkedin %}
-                        <a href="{{ member.linkedin }}" target="_blank">
-                            <img src="/static/icons/linkedin.svg" height="32" alt="linkedin logo">
-                        </a>
-                        {% endif %}
-                        {% if member.pubmed %}
-                        <a href="{{ member.pubmed }}" target="_blank">
-                            <img src="/static/icons/pubmed.svg" height="32" alt="pubmed logo">
-                        </a>
-                        {% endif %}
-                    </div>
-                    {% if member.personal_website %}
-                    <div class="container mt-1 mb-0">
-                        <a href="{{ member.personal_website }}" target="_blank" class="btn btn-secondary" style="margin-left: -15px;">Personal Website</a>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
+        <img
+            src="{% static 'people/' %}{{ member.first_name }} {{ member.last_name }}.jpg"
+            class="card-img-top"
+            style="aspect-ratio: 1 / 1; width: 100%; object-fit: cover;"
+            alt="{{ member.first_name }} {{ member.last_name }}"
+            oncontextmenu="return false;"
+        >
+    </picture>
+    <div class="card-body">
+        <h5 class="card-title mb-1">{{ member.first_name }} {% if member.middle_name %} {{ member.middle_name }} {% endif %} {{ member.last_name }}</h5>
+        <p class="card-text mb-1">{{ member.year_start }} - {% if member.year_finish %}{{ member.year_finish }}{% else %}present{% endif %}</p>
+        <p class="card-text mb-1">{{ member.title }}</p>
+        <p><span id="{{ member.first_name }}{{ member.last_name }}" style="color: var(--primary-color);" onclick="copyToClipboard('{{ member.first_name }}{{ member.last_name }}')">{{ member.email }}</span><img src="/static/icons/copy_button.svg" alt="Copy" style="cursor: pointer;vertical-align: middle;height: 1.5em;width: auto;" onclick="copyToClipboard('{{ member.first_name }}{{ member.last_name }}')"></p>
+        {% if member.position_after_finish %}
+        <p class="card-text mb-1">now {{ member.position_after_finish }}</p>
+        {% endif %}
+        {% if not member.year_finish %}
+        <table style="border-collapse: separate; border-spacing:9px;" class="w-100">
+            <tbody>
+                {% for education in member.educations.all %}
+                    <tr>
+                        <td><strong>{{ education.degree }}</strong></td>
+                        <td style="color:#F76900;">|</td>
+                        <td>{{ education.school }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <div class="d-flex flex-wrap gap-2 mt-2">
+            {% if member.google_scholar %}
+            <a href="{{ member.google_scholar }}" target="_blank">
+                <img src="/static/icons/googlescholar.svg" height="32" alt="google scholar logo">
+            </a>
+            {% endif %}
+            {% if member.orcid %}
+            <a href="https://orcid.org/{{ member.orcid }}" target="_blank">
+                <img src="/static/icons/ORCID_iD.svg" height="32" alt="orcid logo">
+            </a>
+            {% endif %}
+            {% if member.linkedin %}
+            <a href="{{ member.linkedin }}" target="_blank">
+                <img src="/static/icons/linkedin.svg" height="32" alt="linkedin logo">
+            </a>
+            {% endif %}
+            {% if member.pubmed %}
+            <a href="{{ member.pubmed }}" target="_blank">
+                <img src="/static/icons/pubmed.svg" height="32" alt="pubmed logo">
+            </a>
+            {% endif %}
         </div>
-        {% endfor %}
+        {% if member.personal_website %}
+        <div class="container mt-1 mb-0">
+            <a href="{{ member.personal_website }}" target="_blank" class="btn btn-secondary" style="margin-left: -15px;">Personal Website</a>
+        </div>
+        {% endif %}
     </div>
 </div>

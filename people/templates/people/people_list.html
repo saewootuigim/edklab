@@ -1,50 +1,63 @@
 {% extends "base.html" %}
 {% block title %}KimLab | people{% endblock %}
+{% block extra_head %}
+<style>
+    .people-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0 1.5rem;
+    }
+    .people-grid-item {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 2;
+        margin-bottom: 1.5rem;
+    }
+    .people-grid-item .category-label {
+        align-self: end;
+    }
+    .people-grid-item .card {
+        align-self: start;
+    }
+    @media (max-width: 991.98px) {
+        .people-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 767.98px) {
+        .people-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 575.98px) {
+        .people-grid { grid-template-columns: 1fr; }
+    }
+</style>
+{% endblock %}
 {% block content %}
 <div id="current-members">
-{% if people.current.supervisors %}
-    <h2 class="text-center py-4">
-        Principal Investigator{{ people.current.supervisors|pluralize }}
-    </h2>
-    {% include 'people/card.html' with members=people.current.supervisors %}
-{% endif %}
-{% if people.current.postdocs %}
-    <h2 class="text-center py-4">
-        Postdoctoral Researcher{{ people.current.postdocs|pluralize }}
-    </h2>
-    {% include 'people/card.html' with members=people.current.postdocs %}
-{% endif %}
-{% if people.current.visitingscholars %}
-    <h2 class="text-center py-4">
-        Visiting Scholar{{ people.current.visitingscholars|pluralize }}
-    </h2>
-    {% include 'people/card.html' with members=people.current.visitingscholars %}
-{% endif %}
-{% if people.current.gradstudents %}
-    <h2 class="text-center py-4">
-        Graduate Student{{ people.current.gradstudents|pluralize }}
-    </h2>
-    {% include 'people/card.html' with members=people.current.gradstudents %}
-{% endif %}
-{% if people.current.staffs %}
-    <h2 class="text-center py-4">
-        Staff{{ people.current.staffs|pluralize }}
-    </h2>
-    {% include 'people/card.html' with members=people.current.staffs %}
-{% endif %}
-{% if people.current.undergrad %}
-    <h2 class="text-center py-4">
-        Undergraduate Student{{ people.current.undergrad|pluralize }}
-    </h2>
-    {% include 'people/card.html' with members=people.current.undergrad %}
-{% endif %}
+    <div class="people-grid">
+        {% for member in people.current_members %}
+        <div class="people-grid-item">
+            <div class="category-label">
+                {% if member.is_first_of_category %}
+                    <h5 class="py-2 mb-0 fw-bold" style="color: var(--secondary-color);">
+                        {{ member.category_label }}
+                    </h5>
+                {% endif %}
+            </div>
+            {% include 'people/card.html' with member=member %}
+        </div>
+        {% endfor %}
+    </div>
 </div>
 <div id="alumni">
 {% if people.alum %}
-    <h2 class="text-center py-4">
-        Lab Alumni{{ people.current.|pluralize }}
-    </h2>
-    {% include 'people/card.html' with members=people.alum %}
+    <h2 class="text-center py-4">Lab Alumni</h2>
+    <div class="people-grid">
+        {% for member in people.alum %}
+        <div class="people-grid-item">
+            <div class="category-label"></div>
+            {% include 'people/card.html' with member=member %}
+        </div>
+        {% endfor %}
+    </div>
 {% endif %}
 </div>
 {% endblock %}
