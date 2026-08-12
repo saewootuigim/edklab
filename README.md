@@ -132,10 +132,10 @@ For current information about the laboratory, please visit:
 
 ## Contact
 
-**Kim Lab**
-456 Life Sciences Complex
-107 College Place
-Syracuse, NY 13244
+**Kim Lab**<br>
+456 Life Sciences Complex<br>
+107 College Place<br>
+Syracuse, NY 13244<br>
 
 Email: [ekim112@syr.edu](mailto:ekim112@syr.edu)
 
