@@ -166,3 +166,6 @@ static/people
 
 # Claude Code
 .claude/
+
+# Generated Files/Folders
+/staticfiles
