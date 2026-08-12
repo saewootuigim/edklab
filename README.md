@@ -1,7 +1,3 @@
-I reviewed the public site, including the Home, People, Publications, Opportunities, and Contact pages. The site is the public website for **Kim Lab at Syracuse University**, led by Assistant Professor Eun-Deok Kim. It presents the lab's research, team members, publications, research opportunities, and contact information. The site identifies **Python, Django, and Bootstrap** as its main web technologies. ([KimLab][1])
-
-Here is a README you can add as `README.md`:
-
 # Kim Lab Website
 
 This repository contains the Django-based website for the **Kim Lab** at Syracuse University, led by **Eun-Deok Kim**.
