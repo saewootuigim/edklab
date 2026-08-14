@@ -7,7 +7,7 @@ DISPLAY_NAMES = {
     2: ('Postdoctoral Researcher', 'Postdoctoral Researchers'),
     3: ('Visiting Scholar', 'Visiting Scholars'),
     4: ('Graduate Student', 'Graduate Students'),
-    5: ('Staff', 'Staff'),
+    5: ('Research Technician', 'Research Technicians'),
     6: ('Undergraduate Student', 'Undergraduate Students'),
 }
 
