@@ -26,8 +26,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = ['localhost','www.ekimlab.com','127.0.0.1']
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = ['localhost','127.0.0.1','www.ekimlab.com','ekimlab.com']
+
+# HTTPS/security hardening (applied only in production, i.e. when DEBUG is off,
+# so local development over plain HTTP is unaffected).
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    # Trust the X-Forwarded-Proto header set by the reverse proxy (nginx/Apache).
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -124,7 +136,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, STATIC_URL),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Default primary key field type
