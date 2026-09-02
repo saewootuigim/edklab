@@ -119,6 +119,9 @@
                         <a class="nav-link {% active_url request 'publication_list' %}" href="{% url 'publication_list' %}"><span class="mx-3">Publications</span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% active_url request 'lab_update' %}" href="{% url 'lab_update' %}"><span class="mx-3">Lab Update</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% active_url request 'opportunity' %}" href="{% url 'opportunity' %}"><span class="mx-3">Opportunities</span></a>
                     </li>
                     <li class="nav-item">
@@ -150,6 +153,7 @@
                         <li><a href="{% url 'main_page' %}" class="text-dark text-decoration-none">Home</a></li>
                         <li><a href="{% url 'people_list' %}" class="text-dark text-decoration-none">People</a></li>
                         <li><a href="{% url 'publication_list' %}" class="text-dark text-decoration-none">Publications</a></li>
+                        <li><a href="{% url 'lab_update' %}" class="text-dark text-decoration-none">Lab Update</a></li>
                         <li><a href="{% url 'opportunity' %}" class="text-dark text-decoration-none">Opportunities</a></li>
                         <li><a href="{% url 'contact' %}" class="text-dark text-decoration-none">Contact</a></li>
                     </ul>

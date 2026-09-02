@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "main",
     'people',
     'publications',
+    'lab_update',
     'opportunity',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -163,6 +163,8 @@ cython_debug/
 
 # private info
 static/people
+static/lab_update/*
+!static/lab_update/.gitkeep
 
 # setups
 .claude/
