@@ -98,6 +98,12 @@ The development site should then be available at:
 http://127.0.0.1:8000/
 ```
 
+Run the tests:
+
+```bash
+python manage.py test
+```
+
 ## Static Files
 
 For local development, Django's development server can serve static files automatically when configured appropriately.

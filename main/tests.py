@@ -33,6 +33,16 @@ class SiteLayoutTests(TestCase):
                 page_title = re.search(r'<title>(.*?)</title>', response.content.decode(), re.S)[1]
                 self.assertEqual(' '.join(page_title.split()), title)
 
+    def test_pages_start_with_doctype_and_load_one_script_library(self):
+        for name in PAGES:
+            with self.subTest(page=name):
+                html = self.get(reverse(name)).content.decode()
+                self.assertTrue(html.startswith('<!DOCTYPE html>'))
+                # Bootstrap 5's bundle (which includes Popper) is the only script library.
+                scripts = re.findall(r'<script src="([^"]+)"', html)
+                self.assertEqual(len(scripts), 1)
+                self.assertIn('bootstrap@5', scripts[0])
+
     def test_navbar_highlights_only_the_current_page(self):
         for name in PAGES:
             with self.subTest(page=name):

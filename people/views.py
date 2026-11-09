@@ -1,43 +1,42 @@
-from collections import Counter
-from django.views.generic import ListView
+from itertools import groupby
+from operator import attrgetter
+
+from django.views.generic import TemplateView
+
 from .models import Person
 
+Role = Person.Role
+
 DISPLAY_NAMES = {
-    1: ('Principal Investigator', 'Principal Investigators'),
-    2: ('Postdoctoral Researcher', 'Postdoctoral Researchers'),
-    3: ('Visiting Scholar', 'Visiting Scholars'),
-    4: ('Graduate Student', 'Graduate Students'),
-    5: ('Research Technician', 'Research Technicians'),
-    6: ('Undergraduate Student', 'Undergraduate Students'),
+    Role.SUPERVISOR: ('Principal Investigator', 'Principal Investigators'),
+    Role.POSTDOC: ('Postdoctoral Researcher', 'Postdoctoral Researchers'),
+    Role.VISITING_SCHOLAR: ('Visiting Scholar', 'Visiting Scholars'),
+    Role.GRAD_STUDENT: ('Graduate Student', 'Graduate Students'),
+    Role.RESEARCH_TECHNICIAN: ('Research Technician', 'Research Technicians'),
+    Role.UNDERGRAD: ('Undergraduate Student', 'Undergraduate Students'),
 }
 
-class PeopleListView(ListView):
-    model = Person
+
+class PeopleListView(TemplateView):
     template_name = 'people/people_list.html'
-    context_object_name = 'people'
 
-    def get_queryset(self):
-        current_qs = Person.objects.filter(
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        current_members = list(Person.objects.filter(
             year_finish__isnull=True
-        ).prefetch_related('educations').order_by('priority', 'year_start', 'first_name')
+        ).prefetch_related('educations').order_by('priority', 'year_start', 'first_name'))
 
-        priority_counts = Counter(p.priority for p in current_qs)
+        # Head each role's group with its display name, plural if it has several people.
+        for priority, group in groupby(current_members, key=attrgetter('priority')):
+            first, *rest = group
+            singular, plural = DISPLAY_NAMES.get(priority, ('', ''))
+            first.is_first_of_category = True
+            first.category_label = plural if rest else singular
 
-        current_members = []
-        seen_priorities = set()
-        for person in current_qs:
-            person.is_first_of_category = person.priority not in seen_priorities
-            if person.is_first_of_category:
-                singular, plural = DISPLAY_NAMES.get(person.priority, ('', ''))
-                person.category_label = plural if priority_counts[person.priority] > 1 else singular
-                seen_priorities.add(person.priority)
-            current_members.append(person)
-
-        alumni = Person.objects.filter(
+        context['current_members'] = current_members
+        # Alumni cards don't show education, so there is nothing to prefetch.
+        context['alumni'] = Person.objects.filter(
             year_finish__isnull=False
-        ).prefetch_related('educations').order_by('-year_finish', 'priority')
-
-        return {
-            'current_members': current_members,
-            'alum': alumni,
-        }
+        ).order_by('-year_finish', 'priority')
+        return context

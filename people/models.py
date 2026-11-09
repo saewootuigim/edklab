@@ -1,11 +1,17 @@
 from django.db import models
-from django.core.validators import URLValidator
-from django.db.models import Case, When, IntegerField
 
 
 class Person(models.Model):
-    # priority
-    priority = models.PositiveIntegerField(choices=((1,"supervisor"),(2,"postdoc"),(3,"visiting scholar"),(4,"grad student"),(5,"research technician"),(6,"undergrad")), null=True, blank=True)
+    class Role(models.IntegerChoices):
+        SUPERVISOR = 1, "supervisor"
+        POSTDOC = 2, "postdoc"
+        VISITING_SCHOLAR = 3, "visiting scholar"
+        GRAD_STUDENT = 4, "grad student"
+        RESEARCH_TECHNICIAN = 5, "research technician"
+        UNDERGRAD = 6, "undergrad"
+
+    # priority: the person's role, which also sets the order of the people page
+    priority = models.PositiveIntegerField(choices=Role, null=True, blank=True)
     # personal info
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, null=True, blank=True)
@@ -17,26 +23,14 @@ class Person(models.Model):
     position_after_finish = models.CharField(max_length=50, null=True, blank=True)
 
     # advertisement
-    personal_website = models.URLField(validators=[URLValidator()], null=True, blank=True)
-    google_scholar = models.URLField(validators=[URLValidator()], null=True, blank=True)
+    personal_website = models.URLField(null=True, blank=True)
+    google_scholar = models.URLField(null=True, blank=True)
     orcid = models.CharField(max_length=19, null=True, blank=True)
-    linkedin = models.URLField(validators=[URLValidator()], null=True, blank=True)
-    pubmed = models.URLField(validators=[URLValidator()], null=True, blank=True)
+    linkedin = models.URLField(null=True, blank=True)
+    pubmed = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
-
-class EducationQuerySet(models.QuerySet):
-    def ordered_by_degree(self):
-        degree_order = Case(
-            When(degree='Ph.D.', then=0),
-            When(degree='M.S.', then=1),
-            When(degree='B.S.', then=2),
-            default=3,
-            output_field=IntegerField(),
-        )
-        return self.annotate(degree_order=degree_order).order_by('degree_order', 'year_earned')
 
 
 class Education(models.Model):
@@ -44,8 +38,6 @@ class Education(models.Model):
     degree = models.CharField(max_length=5, null=True, blank=True)
     school = models.CharField(max_length=100, null=True, blank=True)
     year_earned = models.PositiveIntegerField(null=True, blank=True)
-
-    objects = EducationQuerySet.as_manager()
 
     def __str__(self):
         return f"{self.degree} {self.school} ({self.year_earned})"

@@ -1,43 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}KimLab | home{% endblock %}
 
 {% block extra_head %}
 <style>
-    /* Black outline for text in carousel for readability */
-    .carousel-caption h3,
-    .carousel-caption p {
-        text-shadow:
-        -1px -1px 0 #000,  
-        1px -1px 0 #000,
-        -1px  1px 0 #000,
-        1px  1px 0 #000;
-    }
-
-    .carousel-img-size {
-        width: 100%;
-        height: auto; /* This will not affect the aspect ratio */
-        max-height: 400px; /* Default max height for larger screens */
-        object-fit: cover; /* Maintain aspect ratio and cover the container */
-    }
-
-    .carousel-video-size {
-        width: 100%;
-        height: auto; /* Ensures the video scales with the container */
-        max-height: 400px; /* Default max height for larger screens */
-        /* No object-fit, as videos generally handle aspect ratio differently */
-    }
-
-    @media (max-width: 768px) {
-        .carousel-img-size, .carousel-video-size {
-            max-height: 250px; /* Adjusted max height for tablets */
-        }
-    }
-
-    @media (max-width: 576px) {
-        .carousel-img-size, .carousel-video-size {
-            max-height: 200px; /* Adjusted max height for smartphones */
-        }
-    }
     .carousel-item {
         height: 500px; /* Set the height you want */
         overflow: hidden;
@@ -46,11 +12,7 @@
     .carousel-item video {
         height: 100%;
         width: 100%;
-    }
-    /* Disable right-click */
-    .carousel-item img,
-    .carousel-item video {
-        pointer-events: none;
+        pointer-events: none; /* Disable right-click */
     }
     /* Cropping */
     .cropped {
@@ -69,34 +31,34 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/static/carousel/1.png" class="d-block w-100 cropped" alt="...">
+                <img src="{% static 'carousel/1.png' %}" class="d-block w-100 cropped" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/static/carousel/2.png" class="d-block w-100 cropped" alt="...">
+                <img src="{% static 'carousel/2.png' %}" class="d-block w-100 cropped" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/static/carousel/3.png" class="d-block w-100 cropped" alt="...">
+                <img src="{% static 'carousel/3.png' %}" class="d-block w-100 cropped" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/static/carousel/4.png" class="d-block w-100 cropped" alt="...">
+                <img src="{% static 'carousel/4.png' %}" class="d-block w-100 cropped" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/static/carousel/5.png" class="d-block w-100 cropped" alt="...">
+                <img src="{% static 'carousel/5.png' %}" class="d-block w-100 cropped" alt="...">
             </div>
             <div class="carousel-item">
                 <video class="d-block w-100 fitted" autoplay loop muted>
-                    <source src="/static/carousel/6.mp4" type="video/mp4">
+                    <source src="{% static 'carousel/6.mp4' %}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-item">
-                <img src="/static/carousel/72.png" class="d-block w-100 fitted" alt="...">
+                <img src="{% static 'carousel/72.png' %}" class="d-block w-100 fitted" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/static/carousel/82.png" class="d-block w-100 fitted" alt="...">
+                <img src="{% static 'carousel/82.png' %}" class="d-block w-100 fitted" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/static/carousel/92.png" class="d-block w-100 fitted" alt="...">
+                <img src="{% static 'carousel/92.png' %}" class="d-block w-100 fitted" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -114,7 +76,7 @@
         <div class="col-lg-8 col-md-10 col-sm-12">
             <h1 class="display-6 fw-bold pb-4">Welcome to Kim Lab</h1>
         </div>
-    </div>    
+    </div>
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
             Eun-Deok Kim is a plant molecular and cell biologist with a keen interest in understanding how robust epigenetic and genetic states are established in differentiated cells to drive cell fate and adapt to ever-changing environmental conditions. Using stomata as a model system, her research focuses on: (1) uncovering the mechanisms of chromatin regulatory dynamics that drive stem cell fate programming, and (2) exploring how stem cells initiate specific cellular mechanisms integral to adapting to changing environment. To address these questions, she employs a diverse array of genomics and epigenomics tools, confocal microscopy, and CRISPR genome editing, alongside traditional genetic, molecular biology, and biochemical methodologies.
@@ -122,6 +84,4 @@
     </div>
     </div>
 </div>
-{% endblock %}
-{% block extra_script %}
 {% endblock %}

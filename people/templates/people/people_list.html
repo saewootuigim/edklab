@@ -33,7 +33,7 @@
 {% block content %}
 <div id="current-members">
     <div class="people-grid">
-        {% for member in people.current_members %}
+        {% for member in current_members %}
         <div class="people-grid-item">
             <div class="category-label">
                 {% if member.is_first_of_category %}
@@ -42,19 +42,19 @@
                     </h5>
                 {% endif %}
             </div>
-            {% include 'people/card.html' with member=member %}
+            {% include 'people/card.html' %}
         </div>
         {% endfor %}
     </div>
 </div>
 <div id="alumni">
-{% if people.alum %}
+{% if alumni %}
     <h2 class="text-center py-4">Lab Alumni</h2>
     <div class="people-grid">
-        {% for member in people.alum %}
+        {% for member in alumni %}
         <div class="people-grid-item">
             <div class="category-label"></div>
-            {% include 'people/card.html' with member=member %}
+            {% include 'people/card.html' %}
         </div>
         {% endfor %}
     </div>

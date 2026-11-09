@@ -71,7 +71,7 @@ class PublicationModelTests(TestCase):
         publication = Publication(type='Article', title='T', authors='A', year=2025, journal='J', doi='not a url')
         with self.assertRaises(ValidationError) as cm:
             publication.full_clean()
-        self.assertEqual(list(cm.exception.message_dict), ['doi'])
+        self.assertEqual(cm.exception.message_dict, {'doi': ['Enter a valid URL.']})
         publication.doi = 'https://doi.org/10.1000/xyz'
         publication.full_clean()
 

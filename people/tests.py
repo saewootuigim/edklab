@@ -92,6 +92,11 @@ class PeoplePageTests(TestCase):
         self.assertNotIn('Alumni Univ', html)
         self.assertEqual(html.count('<table'), 6)  # one per current member
 
+    def test_page_runs_three_queries(self):
+        # Current members, their education (prefetched), and alumni.
+        with self.assertNumQueries(3):
+            self.get_html()
+
 
 class PersonModelTests(TestCase):
     def test_str(self):
@@ -113,7 +118,7 @@ class PersonModelTests(TestCase):
                     year_start=2020, **{field: 'not a url'})
                 with self.assertRaises(ValidationError) as cm:
                     person.full_clean()
-                self.assertEqual(list(cm.exception.message_dict), [field])
+                self.assertEqual(cm.exception.message_dict, {field: ['Enter a valid URL.']})
 
 
 class PersonAdminTests(TestCase):
