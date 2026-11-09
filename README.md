@@ -49,13 +49,14 @@ The production website is hosted on **PythonAnywhere**.
 
 Static files are collected using Django's `collectstatic` command and served separately from the Django application.
 
-Typical deployment steps include:
+After pushing changes to GitHub, deploy them from a PythonAnywhere Bash console with the site's virtual environment activated:
 
 ```bash
-python manage.py collectstatic
+source ~/Venv/django612/bin/activate
+bash ~/edklab/deploy.sh
 ```
 
-After updating the application code, the production web application should be reloaded on PythonAnywhere.
+`deploy.sh` pulls the latest code, installs the requirements, runs Django's deployment checks, applies migrations, collects static files, and reloads the web application. It stops at the first step that fails.
 
 ## Local Development
 
