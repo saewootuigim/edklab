@@ -104,6 +104,12 @@ Run the tests:
 python manage.py test
 ```
 
+The tests also run automatically before each commit once the hook is enabled (once per clone):
+
+```bash
+git config core.hooksPath .githooks
+```
+
 ## Static Files
 
 For local development, Django's development server can serve static files automatically when configured appropriately.

@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Run the test suite before every commit; a failing test aborts the commit.
+# Enable once per clone:      git config core.hooksPath .githooks
+# Skip in an emergency with:  git commit --no-verify
+
+# Use the active virtualenv, or the project's usual one next to the repo.
+if [ -z "$VIRTUAL_ENV" ]; then
+    for activate in ../venv/django/Scripts/activate ../venv/django/bin/activate; do
+        if [ -f "$activate" ]; then
+            . "$activate"
+            break
+        fi
+    done
+fi
+if [ -z "$VIRTUAL_ENV" ]; then
+    echo "pre-commit: no virtualenv found. Activate it, or commit with --no-verify." >&2
+    exit 1
+fi
+
+echo "pre-commit: running tests..."
+if ! python manage.py test; then
+    echo "pre-commit: tests failed, commit aborted." >&2
+    exit 1
+fi

@@ -1,6 +1,7 @@
 import re
 
 from django.test import TestCase
+from django.test.html import HTMLParseError, parse_html
 from django.urls import reverse
 
 # URL name -> page title.
@@ -42,6 +43,15 @@ class SiteLayoutTests(TestCase):
                 scripts = re.findall(r'<script src="([^"]+)"', html)
                 self.assertEqual(len(scripts), 1)
                 self.assertIn('bootstrap@5', scripts[0])
+
+    def test_pages_have_no_stray_closing_tags(self):
+        # A stray </div> once closed the page container early on the home page.
+        for name in PAGES:
+            with self.subTest(page=name):
+                try:
+                    parse_html(self.get(reverse(name)).content.decode())
+                except HTMLParseError as error:
+                    self.fail(f'{name}: {error}')
 
     def test_navbar_highlights_only_the_current_page(self):
         for name in PAGES:

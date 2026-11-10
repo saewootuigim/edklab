@@ -9,7 +9,7 @@ class Publication(models.Model):
         PATENT = "Patent"
         DISSERTATION = "Dissertation"
 
-    type = models.CharField(max_length=13, default="Journal", choices=Type)
+    type = models.CharField(max_length=13, default=Type.ARTICLE, choices=Type)
     title = models.CharField(max_length=999)
     authors = models.TextField(help_text="Comma separated list of authors")
     year = models.PositiveIntegerField()

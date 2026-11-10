@@ -1,9 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.test import TestCase
+from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 
 from .models import Publication
+from .templatetags.publication_extras import bold_pi
 
 
 def create_publication(**fields):
@@ -45,6 +46,17 @@ class PublicationListTests(TestCase):
         self.assertIn('<em>Plant Cell</em><br/>', html)
         self.assertIn('vol. 35, issue 2, pp. 10-20', ' '.join(html.split()))
 
+    def test_pi_name_is_bolded(self):
+        create_publication(title='PI paper', authors='Doe J, Eun Deok Kim, Lee K', year=2024)
+        html = self.get(reverse('publication_list')).content.decode()
+        self.assertIn('<span>Doe J, <strong>Eun-Deok Kim</strong>, Lee K</span>', html)
+
+    def test_markup_in_authors_is_shown_as_text(self):
+        create_publication(title='Odd paper', authors='<img src=x onerror=alert(1)> Doe J', year=2024)
+        html = self.get(reverse('publication_list')).content.decode()
+        self.assertIn('<span>&lt;img src=x onerror=alert(1)&gt; Doe J</span>', html)
+        self.assertNotIn('<img src=x', html)
+
     def test_no_heading_without_publications(self):
         Publication.objects.all().delete()
         self.assertNotContains(self.get(reverse('publication_list')), '<h3>Publications</h3>')
@@ -64,6 +76,9 @@ class PublicationModelTests(TestCase):
             ('Article', 'Article'), ('Review', 'Review'), ('Protocol', 'Protocol'),
             ('Patent', 'Patent'), ('Dissertation', 'Dissertation')])
 
+    def test_new_publications_default_to_article(self):
+        self.assertEqual(Publication().type, Publication.Type.ARTICLE)
+
     def test_str_is_title(self):
         self.assertEqual(str(Publication(title='On Engines')), 'On Engines')
 
@@ -74,6 +89,16 @@ class PublicationModelTests(TestCase):
         self.assertEqual(cm.exception.message_dict, {'doi': ['Enter a valid URL.']})
         publication.doi = 'https://doi.org/10.1000/xyz'
         publication.full_clean()
+
+
+class BoldPiFilterTests(SimpleTestCase):
+    def test_bolds_only_the_first_mention(self):
+        self.assertEqual(
+            bold_pi('Eun-Deok Kim, Doe J, Eun-Deok Kim'),
+            '<strong>Eun-Deok Kim</strong>, Doe J, Eun-Deok Kim')
+
+    def test_leaves_other_author_lists_alone(self):
+        self.assertEqual(bold_pi('Doe J, Lee K'), 'Doe J, Lee K')
 
 
 class PublicationAdminTests(TestCase):
